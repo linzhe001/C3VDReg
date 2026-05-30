@@ -1,0 +1,14 @@
+{
+  "script_path": "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_pointnetlk_revisited_c3vd.py",
+  "argv": [
+    "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_pointnetlk_revisited_c3vd.py",
+    "--config",
+    "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk_revisited/train/pointnetlk_revisited_smoke_bridge_config.yaml"
+  ],
+  "return_code": 0,
+  "cuda_available": true,
+  "duration_ms": 4314685.914037982,
+  "torch_peak_allocated_mb": 3480.44189453125,
+  "torch_peak_reserved_mb": 5180.0,
+  "exception": null
+}

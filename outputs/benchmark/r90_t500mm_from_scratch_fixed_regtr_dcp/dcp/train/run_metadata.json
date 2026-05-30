@@ -1,0 +1,46 @@
+{
+  "status": "completed",
+  "train_bridge": "src.benchmarking.bridges.train_dcp_c3vd",
+  "bridge_config_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_from_scratch_fixed_regtr_dcp/dcp/train/dcp_smoke_bridge_config.yaml",
+  "checkpoint_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_from_scratch_fixed_regtr_dcp/dcp/train/train_bridge/models/model_best.pth",
+  "checkpoint_load_verified": true,
+  "train_time_ms": 58275744.27365185,
+  "train_peak_memory_mb": 12600.0,
+  "train_peak_allocated_mb": 12077.7216796875,
+  "train_command_metrics": [
+    {
+      "name": "dcp_train",
+      "command": [
+        "/home/linzhe/anaconda3/envs/PCLR_compare/bin/python",
+        "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_dcp_c3vd.py",
+        "--config",
+        "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_from_scratch_fixed_regtr_dcp/dcp/train/dcp_smoke_bridge_config.yaml"
+      ],
+      "metrics_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_from_scratch_fixed_regtr_dcp/dcp/train/train_bridge_metrics/dcp_train.json",
+      "wall_time_ms": 58283571.52426499,
+      "duration_ms": 58275744.27365185,
+      "torch_peak_allocated_mb": 12077.7216796875,
+      "torch_peak_reserved_mb": 12600.0,
+      "return_code": 0
+    }
+  ],
+  "adapter_load_verified": true,
+  "model_id": "dcp",
+  "git_snapshot": {
+    "timestamp": "2026-05-21T13:57:42.651379+00:00",
+    "git_commit": "a40dea687b823d4106d3ec7978f0dfb32f7dfaaf",
+    "git_branch": "master",
+    "git_dirty": true,
+    "config_sha256": "d037d778b98875f7a9ea0292884a1d851feaa3cdf0af5bce13603a7389b3d0b7",
+    "manifest_sha256": "7cb917972f4fa0ff867e343e344b731be5f8cdb1ae7e8f859f0d03e46cbb5513",
+    "subset_config_sha256": "23de1b7b4ddc6c125bb051920121d74b52f6e12fdc93b5cfe8803dd314da6d37",
+    "preprocess_profile_id": "canonical_v1",
+    "model_id": "dcp",
+    "checkpoint_id": null,
+    "non_release_traceability_warning": true
+  },
+  "wandb": {
+    "status": "initialized"
+  },
+  "output_dir": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_from_scratch_fixed_regtr_dcp/dcp/train"
+}

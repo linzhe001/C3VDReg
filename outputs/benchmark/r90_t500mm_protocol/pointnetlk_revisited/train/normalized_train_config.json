@@ -1,0 +1,102 @@
+{
+  "benchmark": {
+    "name": "c3vd_raycasting_v1",
+    "split": "train",
+    "subset_name": null,
+    "point_unit": "mm_like",
+    "official_track": "main"
+  },
+  "data": {
+    "manifest_path": "/home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/c3vd_raycasting_manifest.jsonl",
+    "subset_config_path": "/home/linzhe/PCLR_compare/configs/subset_config.json",
+    "dataset_root": "/mnt/f/Datasets/C3VD_sever_datasets"
+  },
+  "preprocess": {
+    "profile": "canonical_v1",
+    "seed": 42,
+    "sampling_override": null,
+    "num_points_override": 8192
+  },
+  "model": {
+    "id": "pointnetlk_revisited",
+    "checkpoint_path": null,
+    "overrides": {
+      "normalize_mode": "none",
+      "max_iter": 10,
+      "xtol": 1e-07,
+      "dim_k": 1024,
+      "data_type": "synthetic",
+      "use_voxelization": false
+    }
+  },
+  "perturbation": {
+    "enabled": true,
+    "rotation_deg": 90.0,
+    "translation_m": 500.0,
+    "noise_sigma": 0.0,
+    "noise_clip": 0.0,
+    "apply_noise_to": "source"
+  },
+  "runtime": {
+    "device": "cuda:0",
+    "batch_size": 32,
+    "num_workers": 4,
+    "export_html": false,
+    "output_dir": "outputs/benchmark/r90_t500mm_protocol/pointnetlk_revisited/train",
+    "train_mode": "full",
+    "train_metadata_path": null,
+    "dataset_overrides": {
+      "num_points": 8192,
+      "frame_stride": 1,
+      "max_train_pairs": null,
+      "max_val_pairs": null,
+      "max_test_pairs": null
+    },
+    "training_overrides": {
+      "max_epochs": 20,
+      "batch_size": 32,
+      "lr": 0.0001,
+      "grad_clip_norm": 1.0,
+      "max_loss": null,
+      "pretrained_from": "/home/linzhe/PCLR_compare/outputs/benchmark/hparam_transfer/pointnetlk_revisited_measured_run/train_full_8192/train_bridge/pointnetlk_c3vd_model_best.pth"
+    }
+  },
+  "analysis": {
+    "required_tables": [
+      "leaderboard_main",
+      "leaderboard_multithreshold",
+      "bucket_overlap",
+      "bucket_rotation",
+      "bucket_scene",
+      "efficiency_summary",
+      "geometry_summary"
+    ],
+    "required_curves": [
+      "rr_multithreshold",
+      "success_latency_pareto"
+    ],
+    "bucket_keys": [
+      "overlap_bin",
+      "rotation_bin",
+      "translation_bin",
+      "scene_id",
+      "preprocess_profile_id",
+      "refinement_track"
+    ],
+    "geometry": {
+      "sample_count": 2048,
+      "distance_mode": "visible_overlap_preferred",
+      "export_histogram": true,
+      "export_cdf": true
+    },
+    "qualitative": {
+      "topk_failures": 20,
+      "export_failure_gallery": true
+    },
+    "export": {
+      "html": false,
+      "png": true,
+      "markdown_tables": true
+    }
+  }
+}

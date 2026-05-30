@@ -1,0 +1,144 @@
+{
+  "benchmark": {
+    "name": "c3vd_raycasting_v1",
+    "split": "train",
+    "subset_name": null,
+    "point_unit": "mm_like",
+    "official_track": "main"
+  },
+  "data": {
+    "manifest_path": "/home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/c3vd_raycasting_manifest.jsonl",
+    "subset_config_path": "/home/linzhe/PCLR_compare/configs/subset_config.json",
+    "dataset_root": "/mnt/f/Datasets/C3VD_sever_datasets"
+  },
+  "preprocess": {
+    "profile": "canonical_v1",
+    "seed": 42,
+    "sampling_override": null,
+    "num_points_override": 8192
+  },
+  "model": {
+    "id": "mamba3d_mamba2_direct",
+    "checkpoint_path": null,
+    "overrides": {
+      "normalize_mode": "unit_cube",
+      "model_type": "mamba3d_mamba2_direct",
+      "dim_k": 1024,
+      "symfn": "max",
+      "lk_mode": "cached_reuse_order",
+      "lm_damping": 0.001,
+      "dx_clip_norm": 0.25,
+      "max_iter": 3,
+      "delta": 0.01,
+      "learn_delta": false,
+      "xtol": 1e-07,
+      "p0_zero_mean": true,
+      "p1_zero_mean": true,
+      "d_model": 128,
+      "depth": 2,
+      "d_state": 16,
+      "d_conv": 4,
+      "expand": 1,
+      "headdim": 64,
+      "ngroups": 1,
+      "chunk_size": 128,
+      "rmsnorm": true,
+      "drop_path_rate": 0.0,
+      "drop_out": 0.0,
+      "layer_scale_init": 0.0001,
+      "stem_hidden_dim": 64,
+      "pos_hidden_dim": 64,
+      "ffn_ratio": 2.0,
+      "mlp_hidden_dim": 256,
+      "mlp_norm": "layernorm",
+      "pooling": "maxavg",
+      "descriptor_norm": "layernorm",
+      "point_order": "sort_xyz"
+    }
+  },
+  "perturbation": {
+    "enabled": true,
+    "rotation_deg": 90.0,
+    "translation_m": 500.0,
+    "noise_sigma": 0.0,
+    "noise_clip": 0.0,
+    "apply_noise_to": "source"
+  },
+  "runtime": {
+    "device": "cuda:0",
+    "batch_size": 1,
+    "num_workers": 0,
+    "export_html": false,
+    "output_dir": "/home/linzhe/PCLR_compare/outputs/benchmark/mamba2_followup_point_order_pair_initializer/direct_sort_xyz_e5/train",
+    "train_mode": "full",
+    "train_metadata_path": null,
+    "dataset_overrides": {
+      "num_points": 8192,
+      "frame_stride": 1,
+      "max_train_pairs": null,
+      "max_val_pairs": null,
+      "max_test_pairs": null
+    },
+    "training_overrides": {
+      "epochs": 5,
+      "batch_size": 4,
+      "lr": 5e-07,
+      "weight_decay": 0.0,
+      "loss_mode": "pointnetlk",
+      "grad_clip_norm": 1.0,
+      "max_loss": 500.0,
+      "eval_max_loss": 500.0,
+      "max_train_steps": null,
+      "max_test_steps": null,
+      "max_skipped_batches": 500,
+      "skip_nonfinite_loss": true,
+      "abort_after_nonfinite_steps": 5,
+      "log_grad_norm": true,
+      "scheduler_factor": 0.5,
+      "scheduler_patience": 5,
+      "scheduler_threshold": 0.0001,
+      "scheduler_threshold_mode": "rel",
+      "scheduler_cooldown": 0,
+      "min_lr": 1e-08,
+      "resume_from": "/home/linzhe/PCLR_compare/outputs/benchmark/mamba3d_mamba2_direct_cached_lk_r90_t500_e50/run_full/train_bridge/mamba3d_pointlk_model_best.pth"
+    }
+  },
+  "analysis": {
+    "required_tables": [
+      "leaderboard_main",
+      "leaderboard_multithreshold",
+      "bucket_overlap",
+      "bucket_rotation",
+      "bucket_scene",
+      "efficiency_summary",
+      "geometry_summary"
+    ],
+    "required_curves": [
+      "rr_multithreshold",
+      "success_latency_pareto"
+    ],
+    "bucket_keys": [
+      "overlap_bin",
+      "rotation_bin",
+      "translation_bin",
+      "scene_id",
+      "preprocess_profile_id",
+      "refinement_track"
+    ],
+    "geometry": {
+      "sample_count": 2048,
+      "distance_mode": "visible_overlap_preferred",
+      "export_histogram": true,
+      "export_cdf": true
+    },
+    "qualitative": {
+      "topk_failures": 20,
+      "export_failure_gallery": false
+    },
+    "export": {
+      "html": false,
+      "png": true,
+      "markdown_tables": true
+    }
+  }
+}

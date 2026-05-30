@@ -1,0 +1,20 @@
+{
+  "script_path": "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_pointnetlk_c3vd.py",
+  "argv": [
+    "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_pointnetlk_c3vd.py",
+    "--config",
+    "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/pointnetlk_smoke_bridge_config.yaml",
+    "--stage",
+    "pointnetlk",
+    "--data-root",
+    "/mnt/f/Datasets/C3VD_sever_datasets",
+    "--transfer-from",
+    "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge/c3vd_pointnetlk_classifier_feat_best.pth"
+  ],
+  "return_code": 0,
+  "cuda_available": true,
+  "duration_ms": 689935.97490096,
+  "torch_peak_allocated_mb": 3110.822265625,
+  "torch_peak_reserved_mb": 3998.0,
+  "exception": null
+}

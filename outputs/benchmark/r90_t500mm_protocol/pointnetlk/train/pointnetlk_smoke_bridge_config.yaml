@@ -1,0 +1,116 @@
+dataset:
+  name: c3vd
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  pair_mode: one_to_one
+  scene_split: true
+  train_ratio: 0.7
+  random_seed: 42
+  num_points: 8192
+  normalize_mode: unit_cube
+  classifier_label_mode: anatomy
+  train_scenes:
+  - cecum_t2_a
+  - cecum_t2_b
+  - cecum_t2_c
+  - cecum_t4_a
+  - cecum_t4_b
+  - desc_t4_a
+  - sigmoid_t1_a
+  - sigmoid_t2_a
+  - trans_t1_b
+  - trans_t2_a
+  - trans_t2_c
+  - trans_t3_a
+  - trans_t3_b
+  val_scenes:
+  - cecum_t1_b
+  - sigmoid_t3_a
+  - trans_t4_b
+  test_scenes:
+  - cecum_t1_a
+  - cecum_t3_a
+  - sigmoid_t3_b
+  - trans_t1_a
+  - trans_t2_b
+  - trans_t4_a
+  sampling_mode: voxel
+  perturbation_enabled: true
+  rotation_deg: 90.0
+  translation_m: 500.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+  frame_stride: 1
+  max_train_pairs: null
+  max_val_pairs: null
+  max_test_pairs: null
+model:
+  name: PointNetLK
+  dim_k: 1024
+  use_tnet: false
+  symfn: max
+  max_iter: 10
+  delta: 0.01
+  learn_delta: false
+  xtol: 1.0e-07
+  p0_zero_mean: true
+  p1_zero_mean: true
+training:
+  batch_size: 2
+  num_workers: 0
+  device: cuda:0
+  classifier:
+    epochs: 1
+    optimizer: Adam
+    learning_rate: 0.001
+    grad_clip_norm: 5.0
+    max_train_steps: 100
+    max_test_steps: 30
+  pointnetlk:
+    epochs: 5
+    optimizer: Adam
+    learning_rate: 1.0e-05
+    pointnet_mode: tune
+    mag: 0.8
+    mag_randomly: true
+    grad_clip_norm: 1.0
+    max_loss: 1000000.0
+    max_skipped_batches: 100
+    max_train_steps: 500
+    max_test_steps: 100
+    resume_from: /home/linzhe/PCLR_compare/outputs/benchmark/hparam_transfer/pointnetlk_measured_run/train_transfer_8192_step_bounded/train_bridge/c3vd_pointnetlk_model_model_best.pth
+    resume_optimizer: false
+    resume_scheduler: false
+output:
+  checkpoint_dir: /home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge
+  log_dir: /home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge_logs
+  save_interval: 10
+  classifier_prefix: c3vd_pointnetlk_classifier
+  pointnetlk_prefix: c3vd_pointnetlk_model
+testing:
+  perturbation_magnitude: 0.8
+  num_test_samples: 100
+  metrics:
+  - rotation_error
+  - translation_error
+  - registration_recall
+  thresholds:
+    rotation_deg: 5.0
+    translation_m: 0.1
+augmentation:
+  classifier:
+    rotation_range: 45
+    jitter_sigma: 0.01
+    jitter_clip: 0.05
+  pointnetlk:
+    mag: 0.8
+    randomly: true
+hardware:
+  use_cuda: true
+  cuda_device: 0
+  num_workers: 4
+  pin_memory: true
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  log_interval: 10

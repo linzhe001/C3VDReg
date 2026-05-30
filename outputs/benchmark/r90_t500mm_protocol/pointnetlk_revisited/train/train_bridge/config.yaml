@@ -1,0 +1,84 @@
+dataset:
+  apply_noise_to: source
+  clip: 0.0
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  frame_stride: 1
+  mag: 0.8
+  max_test_pairs: null
+  max_train_pairs: null
+  max_val_pairs: null
+  name: C3VD
+  noise_clip: 0.0
+  noise_sigma: 0.0
+  normalize_mode: none
+  num_points: 8192
+  perturbation_enabled: true
+  random_seed: 42
+  rotation_deg: 90.0
+  sampling_mode: voxel
+  sigma: 0.0
+  test_scenes:
+  - cecum_t1_a
+  - cecum_t3_a
+  - sigmoid_t3_b
+  - trans_t1_a
+  - trans_t2_b
+  - trans_t4_a
+  train_ratio: 0.7
+  train_scenes:
+  - cecum_t2_a
+  - cecum_t2_b
+  - cecum_t2_c
+  - cecum_t4_a
+  - cecum_t4_b
+  - desc_t4_a
+  - sigmoid_t1_a
+  - sigmoid_t2_a
+  - trans_t1_b
+  - trans_t2_a
+  - trans_t2_c
+  - trans_t3_a
+  - trans_t3_b
+  translation_m: 500.0
+  val_scenes:
+  - cecum_t1_b
+  - sigmoid_t3_a
+  - trans_t4_b
+model:
+  dim_k: 1024
+  embedding: pointnet
+pointnetlk:
+  max_iter: 10
+  num_random_points: 100
+  p0_zero_mean: true
+  p1_zero_mean: true
+resume:
+  checkpoint: null
+  pretrained: /home/linzhe/PCLR_compare/outputs/benchmark/hparam_transfer/pointnetlk_revisited_measured_run/train_full_8192/train_bridge/pointnetlk_c3vd_model_best.pth
+testing:
+  batch_size: 32
+  device: cuda:0
+  num_workers: 4
+  perturbation_file: null
+training:
+  batch_size: 32
+  checkpoint_dir: /home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk_revisited/train/train_bridge
+  decay_rate: 0.0001
+  device: cuda:0
+  eval_max_loss: null
+  grad_clip_norm: 1.0
+  log_interval: 10
+  lr: 0.0001
+  max_epochs: 20
+  max_loss: null
+  max_skipped_batches: 100
+  min_lr: 1.0e-08
+  num_workers: 4
+  optimizer: Adam
+  save_interval: 10
+  scheduler_cooldown: 0
+  scheduler_factor: 0.5
+  scheduler_patience: 5
+  scheduler_threshold: 0.0001
+  scheduler_threshold_mode: rel
+  start_epoch: 0

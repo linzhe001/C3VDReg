@@ -1,0 +1,82 @@
+dataset:
+  name: c3vd
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  normalize_mode: unit_cube
+  gaussian_noise: false
+  rot_factor: 4.0
+  trans_mag: 0.5
+  train_scenes:
+  - cecum_t2_a
+  - cecum_t2_b
+  - cecum_t2_c
+  - cecum_t4_a
+  - cecum_t4_b
+  - desc_t4_a
+  - sigmoid_t1_a
+  - sigmoid_t2_a
+  - trans_t1_b
+  - trans_t2_a
+  - trans_t2_c
+  - trans_t3_a
+  - trans_t3_b
+  val_scenes:
+  - cecum_t1_b
+  - sigmoid_t3_a
+  - trans_t4_b
+  test_scenes:
+  - cecum_t1_a
+  - cecum_t3_a
+  - sigmoid_t3_b
+  - trans_t1_a
+  - trans_t2_b
+  - trans_t4_a
+  sampling_mode: voxel
+  perturbation_enabled: true
+  rotation_deg: 90.0
+  translation_m: 500.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+  frame_stride: 1
+  max_train_pairs: null
+  max_val_pairs: null
+  max_test_pairs: null
+model:
+  name: dcp
+  emb_nn: dgcnn
+  pointer: transformer
+  head: svd
+  emb_dims: 512
+  n_blocks: 1
+  n_heads: 4
+  ff_dims: 1024
+  dropout: 0
+training:
+  exp_name: benchmark_full_dcp
+  batch_size: 1
+  num_epochs: 50
+  test_batch_size: 1
+  optimizer: Adam
+  lr: 0.0001
+  momentum: 0.9
+  scheduler: step
+  lr_decay_epochs:
+  - 100
+  - 150
+  lr_decay_rate: 0.5
+  use_cuda: true
+  cuda_device: 0
+  log_interval: 10
+  val_interval: 1
+  save_interval: 10
+  checkpoint_dir: /home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_from_scratch_fixed_regtr_dcp/dcp/train/train_bridge
+  num_workers: 2
+  seed: 42
+  device: cuda:0
+testing:
+  pretrained: null
+  batch_size: 8
+  num_workers: 2

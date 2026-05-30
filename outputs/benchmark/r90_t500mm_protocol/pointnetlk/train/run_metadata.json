@@ -1,0 +1,72 @@
+{
+  "status": "completed",
+  "train_bridge": "src.benchmarking.bridges.train_pointnetlk_c3vd",
+  "bridge_config_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/pointnetlk_smoke_bridge_config.yaml",
+  "checkpoint_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge/c3vd_pointnetlk_model_model_best.pth",
+  "checkpoint_load_verified": true,
+  "pretrain_checkpoint_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge/c3vd_pointnetlk_classifier_feat_best.pth",
+  "train_time_ms": 719483.4945759503,
+  "train_peak_memory_mb": 3998.0,
+  "train_peak_allocated_mb": 3110.822265625,
+  "train_command_metrics": [
+    {
+      "name": "pointnetlk_classifier",
+      "command": [
+        "/home/linzhe/anaconda3/envs/PCLR_compare/bin/python",
+        "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_pointnetlk_c3vd.py",
+        "--config",
+        "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/pointnetlk_smoke_bridge_config.yaml",
+        "--stage",
+        "classifier",
+        "--data-root",
+        "/mnt/f/Datasets/C3VD_sever_datasets"
+      ],
+      "metrics_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge_metrics/pointnetlk_classifier.json",
+      "wall_time_ms": 30953.360666986555,
+      "duration_ms": 29547.519674990326,
+      "torch_peak_allocated_mb": 324.26904296875,
+      "torch_peak_reserved_mb": 460.0,
+      "return_code": 0
+    },
+    {
+      "name": "pointnetlk",
+      "command": [
+        "/home/linzhe/anaconda3/envs/PCLR_compare/bin/python",
+        "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_pointnetlk_c3vd.py",
+        "--config",
+        "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/pointnetlk_smoke_bridge_config.yaml",
+        "--stage",
+        "pointnetlk",
+        "--data-root",
+        "/mnt/f/Datasets/C3VD_sever_datasets",
+        "--transfer-from",
+        "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge/c3vd_pointnetlk_classifier_feat_best.pth"
+      ],
+      "metrics_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge_metrics/pointnetlk.json",
+      "wall_time_ms": 691379.6908579534,
+      "duration_ms": 689935.97490096,
+      "torch_peak_allocated_mb": 3110.822265625,
+      "torch_peak_reserved_mb": 3998.0,
+      "return_code": 0
+    }
+  ],
+  "adapter_load_verified": true,
+  "model_id": "pointnetlk",
+  "git_snapshot": {
+    "timestamp": "2026-05-13T09:20:10.384941+00:00",
+    "git_commit": "86c68025dcae61b075d3f7a2630929345ba26d91",
+    "git_branch": "master",
+    "git_dirty": true,
+    "config_sha256": "7da3bee63f5725f4552f11d8d22dd3fa14a6bb6999b2516f19027f70b0a34bf6",
+    "manifest_sha256": "7cb917972f4fa0ff867e343e344b731be5f8cdb1ae7e8f859f0d03e46cbb5513",
+    "subset_config_sha256": "23de1b7b4ddc6c125bb051920121d74b52f6e12fdc93b5cfe8803dd314da6d37",
+    "preprocess_profile_id": "canonical_v1",
+    "model_id": "pointnetlk",
+    "checkpoint_id": null,
+    "non_release_traceability_warning": true
+  },
+  "wandb": {
+    "status": "initialized"
+  },
+  "output_dir": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train"
+}

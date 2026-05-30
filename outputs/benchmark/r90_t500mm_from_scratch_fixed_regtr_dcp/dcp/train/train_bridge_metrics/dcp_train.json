@@ -1,0 +1,14 @@
+{
+  "script_path": "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_dcp_c3vd.py",
+  "argv": [
+    "/home/linzhe/PCLR_compare/src/benchmarking/bridges/train_dcp_c3vd.py",
+    "--config",
+    "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_from_scratch_fixed_regtr_dcp/dcp/train/dcp_smoke_bridge_config.yaml"
+  ],
+  "return_code": 0,
+  "cuda_available": true,
+  "duration_ms": 58275744.27365185,
+  "torch_peak_allocated_mb": 12077.7216796875,
+  "torch_peak_reserved_mb": 12600.0,
+  "exception": null
+}

@@ -1,0 +1,2 @@
+bucket_key,bucket_value,count,registration_recall@rre_5deg_rte_5mm,rot_hit_5deg_rate,trans_hit_5mm_rate,rre_deg_mean,rte_mm_mean,latency_ms_mean,visible_nn_mean_mm_mean
+overlap_bin,missing,2088,0.031609195402298854,0.24281609195402298,0.03639846743295019,18.170175301178816,74.14828299469175,121.67361485251367,3.047530506068403

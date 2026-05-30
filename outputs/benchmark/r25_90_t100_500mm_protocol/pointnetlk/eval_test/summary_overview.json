@@ -1,0 +1,56 @@
+{
+  "recommended_reading_order": [
+    {
+      "path": "summary_overview.md",
+      "purpose": "先看这一页，快速确认本次 run 的关键结论。"
+    },
+    {
+      "path": "leaderboard/leaderboard_main.csv",
+      "purpose": "主结果表，优先看 RR@5deg/5mm、边际命中率、RRE、RTE、训练时间和训练峰值显存。"
+    },
+    {
+      "path": "leaderboard/efficiency_summary.csv",
+      "purpose": "速度与资源表，优先看训练时间、训练峰值显存、preprocess/inference/latency。"
+    },
+    {
+      "path": "geometry/geometry_summary.csv",
+      "purpose": "几何误差摘要，优先看 visible_nn_mean 和 chamfer。"
+    },
+    {
+      "path": "report.html",
+      "purpose": "图表和链接总览。"
+    }
+  ],
+  "headline_metrics": {
+    "model_id": "pointnetlk",
+    "preprocess_profile_id": "canonical_v1",
+    "sample_count": 2088,
+    "registration_recall@rre_5deg_rte_5mm": 0.0014367816091954023,
+    "rot_hit_5deg_rate": 0.027298850574712645,
+    "trans_hit_5mm_rate": 0.0019157088122605363,
+    "rre_deg_mean": 47.07049291590103,
+    "rre_deg_median": 43.02207945586129,
+    "rre_deg_p90": 87.1658700034836,
+    "rte_mm_mean": 194.69528980047215,
+    "rte_mm_median": 154.89476171554827,
+    "rte_mm_p90": 413.4910868398277,
+    "visible_nn_mean_mm_mean": 4.814634857137527,
+    "train_time_ms": 719483.4945759503,
+    "train_peak_memory_mb": 3998.0
+  },
+  "efficiency_metrics": {
+    "train_time_ms": 719483.4945759503,
+    "train_peak_memory_mb": 3998.0,
+    "train_peak_allocated_mb": 3110.822265625,
+    "preprocess_time_ms_mean": 4.7570618242256755,
+    "inference_time_ms_mean": 88.36524337270042,
+    "refinement_time_ms_mean": 0.0,
+    "latency_ms_mean": 93.12230519692609,
+    "latency_ms_p90": 115.99349699099548,
+    "peak_memory_mb_mean": 0.0
+  },
+  "geometry_metrics": {
+    "visible_nn_mean_mm_mean": 4.814634857137527,
+    "trimmed_chamfer_mm_mean": 5.816582273398987
+  }
+}

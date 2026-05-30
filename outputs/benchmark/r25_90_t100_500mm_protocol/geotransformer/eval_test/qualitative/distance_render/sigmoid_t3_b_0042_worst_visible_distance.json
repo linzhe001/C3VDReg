@@ -1,0 +1,12 @@
+{
+  "sample_id": "sigmoid_t3_b:0042",
+  "scene_id": "sigmoid_t3_b",
+  "visible_nn_mean_mm": 20.58956249511433,
+  "rre_deg": 176.8956167180298,
+  "rte_mm": 504.2805433844851,
+  "point_unit": "mm_like",
+  "render_backend": "matplotlib",
+  "camera_view_strategy": "max_visible_error",
+  "color_max_mm": 130.16360326767247,
+  "distance_render_path": "/home/linzhe/PCLR_compare/outputs/benchmark/r25_90_t100_500mm_protocol/geotransformer/eval_test/qualitative/distance_render/sigmoid_t3_b_0042_worst_visible_distance.png"
+}

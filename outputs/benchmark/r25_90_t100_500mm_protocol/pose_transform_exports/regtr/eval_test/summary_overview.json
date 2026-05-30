@@ -1,0 +1,57 @@
+{
+  "recommended_reading_order": [
+    {
+      "path": "summary_overview.md",
+      "purpose": "先看这一页，快速确认本次 run 的关键结论。"
+    },
+    {
+      "path": "leaderboard/leaderboard_main.csv",
+      "purpose": "主结果表，优先看 RR@5deg/5mm、边际命中率、RRE、RTE、trimmed Chamfer、训练时间和训练峰值显存。"
+    },
+    {
+      "path": "leaderboard/efficiency_summary.csv",
+      "purpose": "速度与资源表，优先看训练时间、训练峰值显存、preprocess/inference/latency。"
+    },
+    {
+      "path": "geometry/geometry_summary.csv",
+      "purpose": "几何误差摘要，优先看 visible_nn_mean 和 chamfer。"
+    },
+    {
+      "path": "report.html",
+      "purpose": "图表和链接总览。"
+    }
+  ],
+  "headline_metrics": {
+    "model_id": "regtr",
+    "preprocess_profile_id": "canonical_v1",
+    "sample_count": 2088,
+    "registration_recall@rre_5deg_rte_5mm": 0.05507662835249042,
+    "rot_hit_5deg_rate": 0.18869731800766285,
+    "trans_hit_5mm_rate": 0.05603448275862069,
+    "rre_deg_mean": 32.30676661998112,
+    "rre_deg_median": 19.945158936627177,
+    "rre_deg_p90": 78.91734253991599,
+    "rte_mm_mean": 132.95838368302373,
+    "rte_mm_median": 72.62841338894597,
+    "rte_mm_p90": 336.19531663055585,
+    "visible_nn_mean_mm_mean": 7.213634691497535,
+    "trimmed_chamfer_mm_mean": 7.204302893832664,
+    "train_time_ms": 41116822.49939721,
+    "train_peak_memory_mb": 1802.0
+  },
+  "efficiency_metrics": {
+    "train_time_ms": 41116822.49939721,
+    "train_peak_memory_mb": 1802.0,
+    "train_peak_allocated_mb": 1216.0322265625,
+    "preprocess_time_ms_mean": 4.684611392392883,
+    "inference_time_ms_mean": 68.43917935612073,
+    "refinement_time_ms_mean": 0.0,
+    "latency_ms_mean": 73.12379074851361,
+    "latency_ms_p90": 99.3730369664263,
+    "peak_memory_mb_mean": 0.0
+  },
+  "geometry_metrics": {
+    "visible_nn_mean_mm_mean": 7.213634691497535,
+    "trimmed_chamfer_mm_mean": 7.204302893832664
+  }
+}

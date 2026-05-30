@@ -1,0 +1,75 @@
+benchmark:
+  name: c3vd_raycasting_v1
+  split: test
+  subset_name: null
+  point_unit: mm_like
+  official_track: main
+data:
+  manifest_path: /home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/c3vd_raycasting_manifest.jsonl
+  subset_config_path: /home/linzhe/PCLR_compare/configs/subset_config.json
+  dataset_root: /mnt/f/Datasets/C3VD_sever_datasets
+preprocess:
+  profile: canonical_v1
+  seed: 42
+  sampling_override: null
+  num_points_override: 8192
+model:
+  id: pointnetlk
+  checkpoint_path: /home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge/c3vd_pointnetlk_model_model_best.pth
+  overrides:
+    normalize_mode: unit_cube
+    max_iter: 10
+    delta: 0.01
+    dim_k: 1024
+    use_tnet: false
+    symfn: max
+perturbation:
+  enabled: true
+  rotation_deg: 90.0
+  translation_m: 500.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+  min_rotation_deg: 25.0
+  min_translation_m: 100.0
+runtime:
+  device: cuda:0
+  batch_size: 1
+  num_workers: 0
+  export_html: false
+  output_dir: outputs/benchmark/r25_90_t100_500mm_protocol/pointnetlk/eval_test
+  train_mode: smoke
+  train_metadata_path: /home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/run_metadata.json
+  dataset_overrides: {}
+  training_overrides: {}
+analysis:
+  required_tables:
+  - leaderboard_main
+  - leaderboard_multithreshold
+  - bucket_overlap
+  - bucket_rotation
+  - bucket_scene
+  - efficiency_summary
+  - geometry_summary
+  required_curves:
+  - rr_multithreshold
+  - success_latency_pareto
+  bucket_keys:
+  - overlap_bin
+  - rotation_bin
+  - translation_bin
+  - scene_id
+  - preprocess_profile_id
+  - refinement_track
+  geometry:
+    sample_count: 2048
+    distance_mode: visible_overlap_preferred
+    export_histogram: true
+    export_cdf: true
+  qualitative:
+    topk_failures: 20
+    export_failure_gallery: false
+  export:
+    html: false
+    png: false
+    markdown_tables: true

@@ -1,0 +1,2 @@
+model_id,preprocess_profile_id,train_time_ms,train_peak_memory_mb,train_peak_allocated_mb,preprocess_time_ms_mean,latency_ms_mean,latency_ms_p90,inference_time_ms_mean,refinement_time_ms_mean,peak_memory_mb_mean,sample_count
+mamba3d_mamba2_direct,canonical_v1,4716469.691561069,12240.0,9065.99609375,4.709161252468148,121.67361485251367,155.23068699985743,116.96445360004552,0.0,0.0,2088

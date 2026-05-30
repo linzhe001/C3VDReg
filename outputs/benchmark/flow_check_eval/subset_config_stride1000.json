@@ -1,0 +1,160 @@
+{
+  "schema_version": "0.1.0",
+  "dataset_name": "C3VD-derived paired point cloud corpus",
+  "task_family": "point_cloud_registration",
+  "pair_modes": {
+    "primary": "one_to_one",
+    "secondary": "scene_reference"
+  },
+  "data_root": "/mnt/f/Datasets/C3VD_sever_datasets",
+  "directories": {
+    "source_root": "/mnt/f/Datasets/C3VD_sever_datasets/C3VD_ply_source",
+    "visible_root": "/mnt/f/Datasets/C3VD_sever_datasets/visible_point_cloud_ply_depth",
+    "reference_root": "/mnt/f/Datasets/C3VD_sever_datasets/C3VD_ref"
+  },
+  "seed": 42,
+  "scene_splits": {
+    "train": [
+      "cecum_t2_a",
+      "cecum_t2_b",
+      "cecum_t2_c",
+      "cecum_t4_a",
+      "cecum_t4_b",
+      "desc_t4_a",
+      "sigmoid_t1_a",
+      "sigmoid_t2_a",
+      "trans_t1_b",
+      "trans_t2_a",
+      "trans_t2_c",
+      "trans_t3_a",
+      "trans_t3_b"
+    ],
+    "val": [
+      "cecum_t1_b",
+      "sigmoid_t3_a",
+      "trans_t4_b"
+    ],
+    "test": [
+      "cecum_t1_a",
+      "cecum_t3_a",
+      "sigmoid_t3_b",
+      "trans_t1_a",
+      "trans_t2_b",
+      "trans_t4_a"
+    ]
+  },
+  "scene_pair_counts": {
+    "cecum_t1_a": 276,
+    "cecum_t1_b": 765,
+    "cecum_t2_a": 370,
+    "cecum_t2_b": 1142,
+    "cecum_t2_c": 595,
+    "cecum_t3_a": 730,
+    "cecum_t4_a": 465,
+    "cecum_t4_b": 425,
+    "desc_t4_a": 148,
+    "sigmoid_t1_a": 700,
+    "sigmoid_t2_a": 514,
+    "sigmoid_t3_a": 613,
+    "sigmoid_t3_b": 536,
+    "trans_t1_a": 61,
+    "trans_t1_b": 700,
+    "trans_t2_a": 194,
+    "trans_t2_b": 103,
+    "trans_t2_c": 235,
+    "trans_t3_a": 250,
+    "trans_t3_b": 214,
+    "trans_t4_a": 382,
+    "trans_t4_b": 597
+  },
+  "scene_subset_counts": {
+    "cecum_t1_a": 28,
+    "cecum_t1_b": 77,
+    "cecum_t2_a": 37,
+    "cecum_t2_b": 115,
+    "cecum_t2_c": 60,
+    "cecum_t3_a": 73,
+    "cecum_t4_a": 47,
+    "cecum_t4_b": 43,
+    "desc_t4_a": 15,
+    "sigmoid_t1_a": 70,
+    "sigmoid_t2_a": 52,
+    "sigmoid_t3_a": 62,
+    "sigmoid_t3_b": 54,
+    "trans_t1_a": 7,
+    "trans_t1_b": 70,
+    "trans_t2_a": 20,
+    "trans_t2_b": 11,
+    "trans_t2_c": 24,
+    "trans_t3_a": 25,
+    "trans_t3_b": 22,
+    "trans_t4_a": 39,
+    "trans_t4_b": 60
+  },
+  "split_pair_counts": {
+    "train": 5952,
+    "val": 1975,
+    "test": 2088
+  },
+  "split_subset_counts": {
+    "train": 600,
+    "val": 199,
+    "test": 212
+  },
+  "prefix_pair_counts": {
+    "cecum": 4768,
+    "desc": 148,
+    "sigmoid": 2363,
+    "trans": 2736
+  },
+  "prefix_subset_counts": {
+    "cecum": 480,
+    "desc": 15,
+    "sigmoid": 238,
+    "trans": 278
+  },
+  "reference_vertices": {
+    "unique_values": [
+      50000
+    ],
+    "count_per_scene": {
+      "cecum_t1_a": 50000,
+      "cecum_t1_b": 50000,
+      "cecum_t2_a": 50000,
+      "cecum_t2_b": 50000,
+      "cecum_t2_c": 50000,
+      "cecum_t3_a": 50000,
+      "cecum_t4_a": 50000,
+      "cecum_t4_b": 50000,
+      "desc_t4_a": 50000,
+      "sigmoid_t1_a": 50000,
+      "sigmoid_t2_a": 50000,
+      "sigmoid_t3_a": 50000,
+      "sigmoid_t3_b": 50000,
+      "trans_t1_a": 50000,
+      "trans_t1_b": 50000,
+      "trans_t2_a": 50000,
+      "trans_t2_b": 50000,
+      "trans_t2_c": 50000,
+      "trans_t3_a": 50000,
+      "trans_t3_b": 50000,
+      "trans_t4_a": 50000,
+      "trans_t4_b": 50000
+    }
+  },
+  "subset_strategy": {
+    "name": "smoke_stride1000",
+    "type": "scene_safe_temporal_stride",
+    "frame_stride": 1000,
+    "selection_rule": "Temporary smoke subset for local runner flow checks.",
+    "total_pairs": 10015,
+    "total_subset_pairs": 1011,
+    "effective_ratio": 0.100949,
+    "expected_speedup_vs_full_pairs": 9.906
+  },
+  "notes": [
+    "The current dataset root is a preprocessed C3VD-derived paired point cloud corpus, not the raw official RGB-D release.",
+    "All 22 reference assets are named coverage_mesh.ply but currently store fixed-size 50000-vertex reference point clouds.",
+    "desc_t4_a is kept in train because it is the only desc-prefixed scene in the current dataset root."
+  ]
+}

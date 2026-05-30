@@ -1,0 +1,2 @@
+bucket_key,bucket_value,count,registration_recall@rre_5deg_rte_5mm,rot_hit_5deg_rate,trans_hit_5mm_rate,rre_deg_mean,rte_mm_mean,latency_ms_mean,visible_nn_mean_mm_mean,trimmed_chamfer_mm_mean
+preprocess_profile_id,canonical_v1,2088,0.05507662835249042,0.18869731800766285,0.05603448275862069,32.30676661998112,132.95838368302373,73.12379074851361,7.213634691497535,7.204302893832664

@@ -1,0 +1,186 @@
+{
+  "topk": [
+    {
+      "sample_id": "trans_t1_a:0014",
+      "scene_id": "trans_t1_a",
+      "visible_nn_mean_mm": 39.767387095539426,
+      "failure_tags": [
+        "density_mismatch",
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "sigmoid_t3_b:0000",
+      "scene_id": "sigmoid_t3_b",
+      "visible_nn_mean_mm": 20.870721266043862,
+      "failure_tags": [
+        "density_mismatch",
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t3_a:0142",
+      "scene_id": "cecum_t3_a",
+      "visible_nn_mean_mm": 17.713710353081456,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t3_a:0403",
+      "scene_id": "cecum_t3_a",
+      "visible_nn_mean_mm": 15.024368434123833,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "sigmoid_t3_b:0021",
+      "scene_id": "sigmoid_t3_b",
+      "visible_nn_mean_mm": 14.438773454853287,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "sigmoid_t3_b:0326",
+      "scene_id": "sigmoid_t3_b",
+      "visible_nn_mean_mm": 14.173929983602182,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "sigmoid_t3_b:0328",
+      "scene_id": "sigmoid_t3_b",
+      "visible_nn_mean_mm": 13.95105183403183,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "sigmoid_t3_b:0079",
+      "scene_id": "sigmoid_t3_b",
+      "visible_nn_mean_mm": 13.737752544778644,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "trans_t4_a:0058",
+      "scene_id": "trans_t4_a",
+      "visible_nn_mean_mm": 13.6309074997838,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t3_a:0520",
+      "scene_id": "cecum_t3_a",
+      "visible_nn_mean_mm": 13.44188783787406,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t3_a:0123",
+      "scene_id": "cecum_t3_a",
+      "visible_nn_mean_mm": 13.297374759430749,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t3_a:0028",
+      "scene_id": "cecum_t3_a",
+      "visible_nn_mean_mm": 13.225924509394707,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "sigmoid_t3_b:0130",
+      "scene_id": "sigmoid_t3_b",
+      "visible_nn_mean_mm": 13.07765102956085,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t1_a:0240",
+      "scene_id": "cecum_t1_a",
+      "visible_nn_mean_mm": 12.772036308171486,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "sigmoid_t3_b:0443",
+      "scene_id": "sigmoid_t3_b",
+      "visible_nn_mean_mm": 12.561522362236555,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t3_a:0631",
+      "scene_id": "cecum_t3_a",
+      "visible_nn_mean_mm": 12.460161496841646,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t3_a:0555",
+      "scene_id": "cecum_t3_a",
+      "visible_nn_mean_mm": 12.368788729025553,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "cecum_t3_a:0487",
+      "scene_id": "cecum_t3_a",
+      "visible_nn_mean_mm": 12.356568527108305,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "trans_t2_b:0102",
+      "scene_id": "trans_t2_b",
+      "visible_nn_mean_mm": 12.291898961715669,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    },
+    {
+      "sample_id": "trans_t4_a:0059",
+      "scene_id": "trans_t4_a",
+      "visible_nn_mean_mm": 12.22323477747689,
+      "failure_tags": [
+        "large_rotation",
+        "large_translation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+model_id,preprocess_profile_id,train_time_ms,train_peak_memory_mb,train_peak_allocated_mb,preprocess_time_ms_mean,latency_ms_mean,latency_ms_p90,inference_time_ms_mean,refinement_time_ms_mean,peak_memory_mb_mean,sample_count
+regtr,canonical_v1,41116822.49939721,1802.0,1216.0322265625,4.684611392392883,73.12379074851361,99.3730369664263,68.43917935612073,0.0,0.0,2088

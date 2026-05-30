@@ -1,0 +1,2 @@
+model_id,preprocess_profile_id,visible_nn_mean_mm_mean,visible_nn_p90_mm_p90,trimmed_chamfer_mm_mean
+regtr,canonical_v1,5.581149418511514,,6.1648200144377565

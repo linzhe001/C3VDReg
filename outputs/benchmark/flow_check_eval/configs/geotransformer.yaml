@@ -1,0 +1,63 @@
+benchmark:
+  name: c3vd_raycasting_v1
+  split: test
+  subset_name: mvp_stride10
+  point_unit: m
+  official_track: main
+data:
+  manifest_path: /home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/c3vd_raycasting_manifest.jsonl
+  subset_config_path: /home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/subset_config_stride1000.json
+  dataset_root: /mnt/f/Datasets/C3VD_sever_datasets
+preprocess:
+  profile: canonical_v1
+  seed: 42
+model:
+  id: geotransformer
+  checkpoint_path: null
+  overrides:
+    emb_nn: dgcnn
+    pointer: transformer
+    head: svd
+    experiment_name: geotransformer.3dmatch.stage4.gse.k3.max.oacl.stage2.sinkhorn
+    neighbor_limits:
+    - 38
+    - 36
+    - 36
+    - 38
+runtime:
+  device: cuda:0
+  batch_size: 1
+  num_workers: 0
+  export_html: false
+  output_dir: /home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/runs/geotransformer
+analysis:
+  required_tables:
+  - leaderboard_main
+  - leaderboard_multithreshold
+  - bucket_overlap
+  - bucket_rotation
+  - bucket_scene
+  - efficiency_summary
+  - geometry_summary
+  required_curves:
+  - rr_multithreshold
+  - success_latency_pareto
+  bucket_keys:
+  - overlap_bin
+  - rotation_bin
+  - translation_bin
+  - scene_id
+  - preprocess_profile_id
+  - refinement_track
+  geometry:
+    sample_count: 2048
+    distance_mode: visible_overlap_preferred
+    export_histogram: true
+    export_cdf: true
+  qualitative:
+    topk_failures: 1
+    export_failure_gallery: false
+  export:
+    html: false
+    png: false
+    markdown_tables: false

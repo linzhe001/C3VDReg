@@ -1,0 +1,2 @@
+model_id,preprocess_profile_id,visible_nn_mean_mm_mean,visible_nn_p90_mm_p90,trimmed_chamfer_mm_mean
+geotransformer,canonical_v1,3.5663733863673355,,3.8188138745685656

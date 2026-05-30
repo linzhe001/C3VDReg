@@ -1,0 +1,50 @@
+{
+  "data_census_c3vd": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/01_data_census_c3vd.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/01_data_census_c3vd.png"
+  ],
+  "data_census_3dmatch": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/02_data_census_3dmatch.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/02_data_census_3dmatch.png"
+  ],
+  "model_route_audit": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/03_model_route_audit_regtr_3dmatch.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/03_model_route_audit_regtr_3dmatch_compact.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/03_model_route_audit_regtr_3dmatch.png"
+  ],
+  "transfer_rules": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/04_transfer_rules.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/04_transfer_rules_compact.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/04_transfer_rules.png"
+  ],
+  "agent_prompt_chain": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/05_agent_prompt_chain.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/05_agent_prompt_chain.png"
+  ],
+  "agent_proposal_output": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/06_agent_proposal_summary.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/06_agent_proposal_summary.png",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/06_agent_proposal_yaml_p01.png",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/06_agent_proposal_yaml_p02.png",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/06_agent_proposal_yaml_p03.png",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/06_agent_proposal_yaml_p04.png",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/06_agent_proposal_yaml_p05.png"
+  ],
+  "deterministic_validation": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/07_deterministic_validation.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/07_deterministic_validation_compact.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/07_deterministic_validation.png"
+  ],
+  "smoke_sanity": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/08_smoke_sanity.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/08_smoke_sanity_compact.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/08_smoke_sanity.png"
+  ],
+  "final_benchmark_config": [
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/09_final_benchmark_config.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/09_final_benchmark_config_compact.md",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/09_final_benchmark_config.png",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/09_promoted_default_yaml_p01.png",
+    "/home/linzhe/PCLR_compare/BMVC2026_Linzhe/images/hpt_trace_materials/09_final_eval_config_yaml_p01.png"
+  ]
+}

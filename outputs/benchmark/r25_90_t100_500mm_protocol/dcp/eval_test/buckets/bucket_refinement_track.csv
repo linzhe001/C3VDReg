@@ -1,0 +1,2 @@
+bucket_key,bucket_value,count,registration_recall@rre_5deg_rte_5mm,rot_hit_5deg_rate,trans_hit_5mm_rate,rre_deg_mean,rte_mm_mean,latency_ms_mean,visible_nn_mean_mm_mean
+refinement_track,none,2088,0.0,0.0,0.0,84.15163186703182,313.21458284369794,64.26827110918494,13.514628418382296

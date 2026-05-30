@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-05-25T13:34:39.358926+00:00",
+  "git_commit": "a40dea687b823d4106d3ec7978f0dfb32f7dfaaf",
+  "git_branch": "master",
+  "git_dirty": true,
+  "config_sha256": "c3eacbe6debcecdef0483ef164bb9191977e524d3b252affe0a67b578d48795a",
+  "manifest_sha256": "7cb917972f4fa0ff867e343e344b731be5f8cdb1ae7e8f859f0d03e46cbb5513",
+  "subset_config_sha256": "23de1b7b4ddc6c125bb051920121d74b52f6e12fdc93b5cfe8803dd314da6d37",
+  "preprocess_profile_id": "canonical_v1",
+  "model_id": "pointnetlk",
+  "checkpoint_id": "/home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/pointnetlk/train/train_bridge/c3vd_pointnetlk_model_model_best.pth",
+  "non_release_traceability_warning": true
+}

@@ -1,0 +1,181 @@
+schema_version: 1
+models:
+  bufferx:
+    vendor_path: baselines/BUFFER-X
+    source_kind: vendor_readonly
+    known_routes:
+      - dataset: 3DMatch
+        route: indoor_metric_scene
+        config: baselines/BUFFER-X/config/threedmatch_config.py
+        confidence: high
+      - dataset: Scannetpp_iphone
+        route: indoor_metric_scene
+        config: baselines/BUFFER-X/config/scannetpp_iphone_config.py
+        confidence: medium
+      - dataset: KITTI
+        route: outdoor_lidar
+        config: baselines/BUFFER-X/config/kitti_config.py
+        confidence: high
+      - dataset: ModelNet40
+        route: normalized_object
+        config: baselines/BUFFER-X/config/modelnet40_config.py
+        confidence: medium
+    preferred_for_c3vd:
+      - 3DMatch
+      - Scannetpp_iphone
+      - 3DLoMatch
+    reject_for_c3vd_by_default:
+      - KITTI
+      - WOD
+      - Oxford
+      - ModelNet40
+    scale_sensitive_params:
+      - data.downsample
+      - data.voxel_size_0
+      - data.voxel_size_1
+      - patch.des_r
+      - patch.num_points_per_patch
+      - patch.num_fps
+      - patch.search_radius_thresholds
+      - match.dist_th
+      - match.inlier_th
+      - match.kiss_resolution
+    known_risks:
+      - id: bufferx_implicit_max_r
+        severity: high
+        status: unsupported_requires_code_change
+        evidence_path: baselines/BUFFER-X/models/BUFFERX.py
+        note: density_aware_radius_estimation may cap max_r at 5.0
+
+  dcp:
+    vendor_path: baselines/dcp
+    source_kind: vendor_readonly
+    known_routes:
+      - dataset: ModelNet40
+        route: normalized_object
+        config: configs/benchmark/hparam_transfer/reference_configs/dcp_modelnet40.yaml
+        confidence: high
+    preferred_for_c3vd:
+      - ModelNet40
+    reject_for_c3vd_by_default:
+      - KITTI
+    scale_sensitive_params:
+      - data.num_points
+      - model.emb_dims
+      - eval.acceptance_radius
+
+  pointnetlk:
+    vendor_path: baselines/PointNetLK
+    source_kind: vendor_readonly
+    known_routes:
+      - dataset: ModelNet40
+        route: normalized_object
+        config: configs/benchmark/hparam_transfer/reference_configs/pointnetlk_modelnet40.yaml
+        confidence: high
+    preferred_for_c3vd:
+      - ModelNet40
+    reject_for_c3vd_by_default:
+      - KITTI
+      - 3DMatch
+    scale_sensitive_params:
+      - data.num_points
+      - eval.acceptance_radius
+
+  pointnetlk_revisited:
+    vendor_path: baselines/PointNetLK_Revisited
+    source_kind: vendor_readonly
+    known_routes:
+      - dataset: 3DMatch
+        route: indoor_metric_scene
+        config: configs/benchmark/hparam_transfer/reference_configs/pointnetlk_revisited_3dmatch.yaml
+        confidence: high
+    preferred_for_c3vd:
+      - 3DMatch
+    reject_for_c3vd_by_default:
+      - KITTI
+    scale_sensitive_params:
+      - data.num_points
+      - preprocess.normalize_mode
+      - model.private_normalization_route
+      - model.matching_radius
+      - eval.acceptance_radius
+
+  regtr:
+    vendor_path: baselines/RegTR
+    source_kind: vendor_readonly
+    known_routes:
+      - dataset: 3DMatch
+        route: indoor_metric_scene
+        config: baselines/RegTR/src/conf/3dmatch.yaml
+        confidence: high
+    preferred_for_c3vd:
+      - 3DMatch
+      - 3DLoMatch
+    reject_for_c3vd_by_default:
+      - ModelNet40
+      - KITTI
+    scale_sensitive_params:
+      - parameter: data.voxel_size
+        reference_field: kpconv_options.first_subsampling_dl
+        note: RegTR KPConv first subsampling voxel size; C3VD bridge applies this as kpconv_options.first_subsampling_dl.
+      - parameter: model.matching_radius
+        reference_field: dataset.overlap_radius
+        note: RegTR overlap/correspondence radius; C3VD bridge applies this to dataset.overlap_radius and kpconv_options.overlap_radius.
+      - parameter: losses.r_p
+        reference_field: losses.r_p
+        note: Feature positive radius at the coarsest KPConv octave.
+      - parameter: losses.r_n
+        reference_field: losses.r_n
+        note: Feature negative radius at the coarsest KPConv octave.
+      - parameter: eval.acceptance_radius
+        reference_field: validation.reg_success_thresh_trans
+        note: RegTR checkpoint-selection translation success threshold.
+
+  geotransformer:
+    vendor_path: baselines/GeoTransformer
+    source_kind: vendor_readonly
+    known_routes:
+      - dataset: 3DMatch
+        route: indoor_metric_scene
+        config: baselines/GeoTransformer/experiments/geotransformer.3dmatch.stage4.gse.k3.max.oacl.stage2.sinkhorn/config.py
+        confidence: high
+    preferred_for_c3vd:
+      - 3DMatch
+      - 3DLoMatch
+    reject_for_c3vd_by_default:
+      - ModelNet40
+      - KITTI
+    scale_sensitive_params:
+      - parameter: model.spatial_scale
+        reference_field: backbone.init_voxel_size
+        note: benchmark spatial_scale rescales GeoTransformer's metric radii from the 3DMatch base route.
+      - parameter: model.num_points_in_patch
+        reference_field: model.num_points_in_patch
+        note: patch occupancy knob exposed directly by the benchmark adapter.
+      - parameter: model.neighbor_limits
+        reference_field: backbone.num_stages
+        note: adapter-only runtime knob; vendor config does not expose per-stage limits, so agent should usually keep benchmark default unless memory evidence justifies a change.
+      - parameter: eval.acceptance_radius
+        reference_field: eval.acceptance_radius
+        note: vendor evaluation radius scales together with spatial_scale and should be tracked as evidence even if benchmark keeps it benchmark-owned.
+
+  mamba3d:
+    vendor_path: baselines/Mamba3D
+    source_kind: vendor_readonly
+    known_routes:
+      - dataset: C3VD_PointNetLK_style
+        route: unit_scale_c3vd_adapter
+        config: configs/benchmark/models/mamba3d.yaml
+        confidence: medium
+      - dataset: ModelNet40
+        route: normalized_object
+        config: baselines/Mamba3D/configs/modelnet40.yaml
+        confidence: low
+    preferred_for_c3vd:
+      - C3VD_PointNetLK_style
+      - ModelNet40
+    reject_for_c3vd_by_default:
+      - KITTI
+    scale_sensitive_params:
+      - data.num_points
+      - eval.acceptance_radius

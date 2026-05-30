@@ -1,0 +1,117 @@
+# C3VD Configuration for PointNetLK (Original)
+# Point Cloud Registration using Lucas-Kanade Algorithm with PointNet Features
+
+# Dataset Configuration
+dataset:
+  name: c3vd
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets  # Update this path
+  pair_mode: one_to_one
+  scene_split: true
+  train_ratio: 0.7
+  random_seed: 42
+  num_points: 8192
+  normalize_mode: unit_cube
+  classifier_label_mode: anatomy  # Coarse labels: cecum/desc/sigmoid/trans
+
+# Model Configuration
+model:
+  name: PointNetLK
+
+  # PointNet Feature Extractor
+  dim_k: 1024              # Dimension of feature vector
+  use_tnet: false          # Use T-Net for input/feature transformation
+  symfn: max               # Symmetric function: max or avg
+
+  # Lucas-Kanade Parameters
+  max_iter: 10             # Max iterations for LK optimization
+  delta: 0.01              # Step size for Jacobian approximation
+  learn_delta: false       # Learn delta during training
+  xtol: 1.0e-7            # Convergence tolerance
+  p0_zero_mean: true       # Zero-mean template before registration
+  p1_zero_mean: true       # Zero-mean source before registration
+
+# Training Configuration
+training:
+  # Two-stage training
+  # Stage 1: Train classifier (feature extractor)
+  # Stage 2: Train PointNetLK (with transfer learning)
+
+  # Common parameters
+  batch_size: 32
+  num_workers: 4
+  device: cuda:0
+
+  # Stage 1: Classifier training
+  classifier:
+    epochs: 50            # Reduced from 200 for faster convergence on C3VD
+    optimizer: Adam
+    learning_rate: 0.001   # Default Adam LR
+    grad_clip_norm: 5.0
+
+  # Stage 2: PointNetLK training
+  pointnetlk:
+    epochs: 200           # Reduced from 200
+    optimizer: Adam
+    learning_rate: 0.00001
+    pointnet_mode: tune    # tune or fixed (whether to fine-tune PointNet)
+    mag: 0.8               # Magnitude of random perturbations (twist)
+    mag_randomly: true     # Random magnitude in [0, mag]
+    grad_clip_norm: 1.0
+    max_loss: 1000000.0
+    max_skipped_batches: 100
+
+# Output Configuration
+output:
+  checkpoint_dir: experiments/checkpoints/c3vd_pointnetlk
+  log_dir: experiments/logs/c3vd_pointnetlk
+  save_interval: 10        # Save checkpoint every N epochs
+
+  # Output files
+  classifier_prefix: c3vd_pointnetlk_classifier
+  pointnetlk_prefix: c3vd_pointnetlk_model
+
+# Testing Configuration (optional)
+testing:
+  perturbation_magnitude: 0.8
+  num_test_samples: 100
+  metrics:
+    - rotation_error      # Rotation error in degrees
+    - translation_error   # Translation error in meters
+    - registration_recall # Success rate (error < threshold)
+  thresholds:
+    rotation_deg: 5.0     # Success threshold for rotation (degrees)
+    translation_m: 0.1    # Success threshold for translation (meters)
+
+# Data Augmentation (applied during training)
+augmentation:
+  # For classifier training
+  classifier:
+    rotation_range: 45    # Random rotation range (degrees)
+    jitter_sigma: 0.01    # Gaussian noise std
+    jitter_clip: 0.05     # Gaussian noise clip range
+
+  # For PointNetLK training (handled by RandomTransformSE3)
+  pointnetlk:
+    mag: 0.8              # Twist magnitude
+    randomly: true        # Random magnitude
+
+# Hardware Configuration
+hardware:
+  use_cuda: true
+  cuda_device: 0
+  num_workers: 4
+  pin_memory: true
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  log_interval: 10       # Log every N batches during training
+
+# Notes:
+# 1. Before training PointNetLK, first train the classifier to get feature extractor weights
+# 2. Use the classifier's feature weights as --transfer-from for PointNetLK training
+# 3. Set pointnet_mode to 'tune' to fine-tune PointNet during PointNetLK training
+# 4. Set pointnet_mode to 'fixed' to freeze PointNet weights
+# 5. The mag parameter controls the difficulty of training samples
+# 6. Larger mag = harder perturbations = more challenging registration

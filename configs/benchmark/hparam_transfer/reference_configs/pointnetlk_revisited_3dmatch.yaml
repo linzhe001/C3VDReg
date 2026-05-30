@@ -1,0 +1,39 @@
+schema_version: 1
+model: pointnetlk_revisited
+dataset: 3DMatch
+route: indoor_metric_scene
+source_kind: reference_stub_from_vendor_code
+source_evidence:
+  - path: baselines/PointNetLK_Revisited/README.md
+    field: Dataset.3DMatch
+    note: README declares 3DMatch support and describes the DGR-prepared route.
+  - path: baselines/PointNetLK_Revisited/test.py
+    field: options
+    note: test.py exposes the repository's structured 3DMatch defaults.
+data:
+  dataset_type: 3dmatch
+  data_type: real
+  num_points: 1000
+  overlap_ratio: 0.7
+  voxel_ratio: 0.05
+  voxel: 2.0
+  max_voxel_points: 1000
+  num_voxels: 8
+preprocess:
+  normalize_mode: none
+model:
+  embedding: pointnet
+  dim_k: 1024
+  max_iter: 20
+  private_normalization_route: bn3_metric_unit_no_global_norm
+train:
+  optimizer: Adam
+  max_epochs: 200
+  lr: 0.001
+  decay_rate: 0.0001
+runtime:
+  batch_size: 1
+  num_workers: 0
+notes:
+  - PointNetLK_Revisited does not expose a matching_radius or eval.acceptance_radius in the vendor 3DMatch route.
+  - The train.py ModelNet route exposes num_random_points=100 and max_iter=10, but the public metric-scene route is test.py with real 3DMatch inputs.

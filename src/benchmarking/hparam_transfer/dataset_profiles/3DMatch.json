@@ -1,0 +1,120 @@
+{
+  "dataset_id": "3DMatch",
+  "profile_version": 1,
+  "profile_source": "baseline_config_reference",
+  "data": {
+    "domain": "indoor_metric_scene",
+    "coordinate_unit": "m",
+    "inferred_unit": "m",
+    "pair_type": "partial_to_partial",
+    "source_modality": "rgbd_reconstructed_fragment",
+    "target_modality": "rgbd_reconstructed_fragment",
+    "split_policy": "vendor_defined_scene_split"
+  },
+  "coverage": {
+    "split": "train_val_test",
+    "scene_count": 62,
+    "train_scene_count": 46,
+    "val_scene_count": 8,
+    "test_scene_count": 8,
+    "pair_count_selected": null,
+    "pair_count_measured": null
+  },
+  "geometry": {
+    "source_point_count": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "target_point_count": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "bbox_diag": {
+      "source_p50": null,
+      "target_p50": null,
+      "source_p10": null,
+      "source_p90": null,
+      "target_p10": null,
+      "target_p90": null
+    },
+    "nearest_neighbor_spacing": {
+      "source_p50": null,
+      "target_p50": null,
+      "source_p10": null,
+      "source_p90": null,
+      "target_p10": null,
+      "target_p90": null
+    }
+  },
+  "digests": {
+    "profile_digest": "9d642412034c5fc2a67ef4e39d706ef74a53a5a71435b0b169b6badef922af38",
+    "manifest_digest": null
+  },
+  "route_hints": {
+    "route": "metric_raw",
+    "normalize_mode": "none",
+    "overlap_range": ">30% for standard 3DMatch registration pairs",
+    "low_overlap_companion": "3DLoMatch",
+    "preferred_for_c3vd_when_model_supports_route": true,
+    "c3vd_transfer_note": "metric indoor fragments are closer to C3VD local scene fragments than normalized object routes, but modality and unit scale still differ."
+  },
+  "evidence": [
+    {
+      "source": "official_3dmatch_site",
+      "url": "https://3dmatch.cs.princeton.edu/",
+      "supports": [
+        "RGB-D reconstruction fragments",
+        "geometric registration benchmark",
+        "unified train/test scene assets and split file"
+      ]
+    },
+    {
+      "source": "common_3dmatch_registration_protocol",
+      "supports": [
+        "62 scenes split into 46 train, 8 validation, and 8 test scenes",
+        "standard 3DMatch pairs use overlap greater than 30%"
+      ]
+    }
+  ],
+  "notes": [
+    "Coverage summary: 62 scenes split into 46 train, 8 validation, and 8 test scenes.",
+    "Standard 3DMatch registration pairs are commonly treated as overlap greater than 30%.",
+    "3DMatch is an indoor RGB-D reconstructed fragment registration route, not an object-level normalized route.",
+    "Keep metric-space assumptions unless vendor code explicitly applies private normalization.",
+    "Geometry statistics are registry-level reference facts, not measured from local 3DMatch files in this repo."
+  ],
+  "pose": {
+    "storage_field": null,
+    "storage_field_present_fraction": null,
+    "pose_source": "unknown",
+    "transform_format": "unknown",
+    "transform_shapes": [],
+    "shape_counts": {},
+    "direction": "unknown",
+    "direction_confidence": "missing_profile_evidence",
+    "translation_unit": "m",
+    "translation_norm": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "rotation_determinant": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "rotation_orthonormal_error": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "valid_se3_fraction": null,
+    "bottom_row_valid_fraction": null,
+    "checked_record_count": null,
+    "explicit_transform_count": null,
+    "default_identity_count": null,
+    "evidence": []
+  }
+}

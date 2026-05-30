@@ -1,0 +1,9 @@
+model:
+  id: pointnetlk_revisited
+  checkpoint_path: null
+  overrides:
+    max_iter: 10
+    xtol: 1.0e-7
+    dim_k: 1024
+    data_type: synthetic
+    use_voxelization: false

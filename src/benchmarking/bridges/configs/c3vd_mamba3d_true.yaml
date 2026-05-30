@@ -1,0 +1,50 @@
+# Smoke-first configuration for real mamba_ssm Mamba3D PointNetLK on C3VD.
+
+dataset:
+  num_points: 1024
+  train_ratio: 0.7
+  random_seed: 42
+  normalize_mode: unit_cube
+  sampling_mode: voxel
+  max_train_pairs: 64
+  max_val_pairs: 64
+
+model:
+  model_type: mamba3d_true
+  dim_k: 1024
+  max_iter: 5
+  delta: 1.0e-2
+  num_groups: 64
+  group_size: 32
+  trans_dim: 384
+  depth: 6
+  d_state: 16
+  d_conv: 4
+  expand: 2
+  drop_path_rate: 0.1
+  drop_out: 0.0
+  rms_norm: false
+  grid_size: 0.02
+
+training:
+  epochs: 1
+  batch_size: 2
+  lr: 0.0001
+  weight_decay: 0.01
+  optimizer: AdamW
+  num_workers: 2
+  pointnet_tune: true
+  rot_factor: 0.25
+  trans_mag: 0.2
+  grad_clip_norm: 1.0
+  skip_nonfinite_loss: true
+  abort_after_nonfinite_steps: 5
+  log_grad_norm: true
+  max_train_steps: 5
+  max_test_steps: 5
+
+output:
+  checkpoint_dir: experiments/checkpoints/c3vd_mamba3d_true_smoke
+  log_dir: experiments/logs/c3vd_mamba3d_true_smoke
+
+device: cuda:0

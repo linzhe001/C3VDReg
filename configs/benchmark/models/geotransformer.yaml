@@ -1,0 +1,8 @@
+model:
+  id: geotransformer
+  checkpoint_path: null
+  overrides:
+    experiment_name: geotransformer.3dmatch.stage4.gse.k3.max.oacl.stage2.sinkhorn
+    neighbor_limits: [38, 36, 36, 38]
+    spatial_scale: 100.0
+    num_points_in_patch: 4

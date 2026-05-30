@@ -1,0 +1,13 @@
+model:
+  id: dcp
+  checkpoint_path: null
+  overrides:
+    emb_nn: dgcnn
+    pointer: transformer
+    head: svd
+    emb_dims: 512
+    n_blocks: 1
+    n_heads: 4
+    ff_dims: 1024
+    dropout: 0.0
+    cycle: false

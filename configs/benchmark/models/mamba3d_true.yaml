@@ -1,0 +1,19 @@
+model:
+  id: mamba3d_true
+  checkpoint_path: null
+  overrides:
+    model_type: mamba3d_true
+    dim_k: 1024
+    max_iter: 10
+    delta: 1.0e-2
+    num_groups: 64
+    group_size: 32
+    trans_dim: 384
+    depth: 6
+    d_state: 16
+    d_conv: 4
+    expand: 2
+    drop_path_rate: 0.1
+    drop_out: 0.0
+    rms_norm: false
+    grid_size: 0.02

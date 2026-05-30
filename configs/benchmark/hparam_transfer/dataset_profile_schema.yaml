@@ -1,0 +1,63 @@
+schema_version: 1
+title: dataset_profile
+description: >
+  Schema contract for measured or baseline-config-derived dataset profiles used by
+  Dataset-Profile-Guided Hyperparameter Transfer (DPG-HPT).
+required:
+  - dataset_id
+  - profile_version
+  - profile_source
+  - data
+  - geometry
+  - pose
+  - digests
+properties:
+  dataset_id:
+    type: str
+  aliases:
+    optional: true
+    type: list[str]
+  profile_version:
+    type: int
+  profile_source:
+    enum:
+      - measured
+      - baseline_config_reference
+  created_at:
+    type: str_or_null
+  data:
+    required:
+      - domain
+      - coordinate_unit
+      - inferred_unit
+      - pair_type
+      - source_modality
+      - target_modality
+      - split_policy
+  geometry:
+    required:
+      - source_point_count
+      - target_point_count
+      - bbox_diag
+      - nearest_neighbor_spacing
+  pose:
+    required:
+      - storage_field
+      - storage_field_present_fraction
+      - pose_source
+      - transform_format
+      - transform_shapes
+      - direction
+      - direction_confidence
+      - translation_unit
+      - translation_norm
+      - rotation_determinant
+      - valid_se3_fraction
+      - explicit_transform_count
+      - default_identity_count
+      - evidence
+  digests:
+    required:
+      - profile_digest
+  route_hints:
+    optional: true

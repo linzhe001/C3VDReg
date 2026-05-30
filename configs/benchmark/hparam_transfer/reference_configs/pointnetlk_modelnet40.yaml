@@ -1,0 +1,40 @@
+schema_version: 1
+model: pointnetlk
+reference_dataset: ModelNet40
+route: normalized_object
+source_kind: vendor_default_stub
+source_evidence:
+  - path: baselines/PointNetLK/experiments/train_classifier.py
+    fields:
+      - parser.add_argument('--num-points', default=1024)
+      - parser.add_argument('--dim-k', default=1024)
+      - parser.add_argument('--symfn', default='max')
+      - parser.add_argument('--batch-size', default=32)
+      - parser.add_argument('--epochs', default=200)
+      - parser.add_argument('--optimizer', default='Adam')
+  - path: baselines/PointNetLK/experiments/train_pointlk.py
+    fields:
+      - parser.add_argument('--num-points', default=1024)
+      - parser.add_argument('--mag', default=0.8)
+      - parser.add_argument('--max-iter', default=10)
+      - parser.add_argument('--delta', default=1.0e-2)
+      - parser.add_argument('--pointnet', default='tune')
+      - parser.add_argument('--epochs', default=200)
+  - path: baselines/PointNetLK/ptlk/data/mesh.py
+    fields:
+      - Mesh.on_unit_cube(zero_mean=False)
+data:
+  num_points: 1024
+  coordinate_unit: unit_scale
+  pair_type: full_to_full
+  perturbation_mag: 0.8
+model:
+  dim_k: 1024
+  use_tnet: false
+  symfn: max
+  max_iter: 10
+  delta: 0.01
+  learn_delta: false
+  pointnet_mode: tune
+preprocess:
+  normalize_mode: unit_cube

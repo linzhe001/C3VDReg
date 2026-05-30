@@ -1,0 +1,144 @@
+# Configuration for training RegTR on C3VD dataset
+# Based on RegTR 3DMatch configuration, adapted for C3VD medical imaging data
+
+general:
+  expt_name: c3vd_regtr_regressCoor
+
+# Dataset configuration
+dataset:
+  dataset: c3vd
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  normalize_mode: none
+
+  # Data augmentation (matched to original RegTR)
+  augment_noise: 0.005
+  perturb_pose: small
+
+  # Batch sizes (optimized for 32GB GPU - RegTR is memory intensive)
+  train_batch_size: 2
+  val_batch_size: 2
+  test_batch_size: 1
+
+  # Overlap computation (same as 3DMatch)
+  overlap_radius: 0.0375  # Distance threshold for overlapping points
+
+# Training options
+train_options:
+  niter: -50  # 50 epochs should be sufficient for C3VD
+
+# Optimizer and scheduler
+solver:
+  optimizer: AdamW
+  base_lr: 0.0001
+  weight_decay: 0.0001
+  grad_clip: 0.1
+  scheduler: 'step'
+  scheduler_param: [50000, 0.5]  # Decay by 0.5 every ~15-20 epochs (adjust based on dataset size)
+
+# KPConv backbone configuration
+# Note: These parameters are optimized for 3DMatch and may need tuning for C3VD
+kpconv_options:
+  num_layers: 4
+  neighborhood_limits: [40, 40, 40, 40]
+  aggregation_mode: sum
+  first_subsampling_dl: 0.025  # First subsampling voxel size
+  first_feats_dim: 128
+  fixed_kernel_points: center
+  in_feats_dim: 1
+  in_points_dim: 3
+  conv_radius: 2.5
+  deform_radius: 5.0
+  KP_extent: 2.0
+  KP_influence: linear
+  overlap_radius: 0.0375
+  use_batch_norm: True
+  batch_norm_momentum: 0.02
+  modulated: False
+  num_kernel_points: 15
+
+  # ResNet architecture for KPConv
+  architecture: ['simple',
+                 'resnetb',
+                 'resnetb_strided',
+                 'resnetb',
+                 'resnetb',
+                 'resnetb_strided',
+                 'resnetb',
+                 'resnetb',
+                 'resnetb_strided',
+                 'resnetb',
+                 'resnetb']
+
+# RegTR model configuration
+model:
+  model: regtr.RegTR
+
+  # Transformer architecture
+  attention_type: dot_prod
+  nhead: 8
+  d_embed: 256
+  d_feedforward: 1024
+  dropout: 0.0
+  pre_norm: True
+  transformer_act: relu
+
+  # Transformer encoder
+  num_encoder_layers: 6
+  transformer_encoder_has_pos_emb: True
+  sa_val_has_pos_emb: True
+  ca_val_has_pos_emb: True
+  pos_emb_type: sine  # 'sine' or 'learned'
+
+  # Correspondence decoding
+  corr_decoder_has_pos_emb: True
+  direct_regress_coor: True  # Use MLP for coordinate regression
+
+# Loss function weights and parameters
+losses:
+  # Overlap loss
+  wt_overlap: 1.0
+  overlap_loss_pyr: 3
+  overlap_loss_on: [5]  # Apply only on final output
+
+  # Feature loss (contrastive learning)
+  wt_feature: 0.1
+  wt_feature_un: 0.0
+  r_p: 0.2   # Positive pair distance threshold (1x voxel size at octave 3)
+  r_n: 0.4   # Negative pair distance threshold (2x voxel size)
+  feature_loss_on: [5]
+  feature_loss_type: infonce
+
+  # Correspondence loss
+  wt_corr: 1.0
+  corr_loss_on: [5]
+
+# Validation and evaluation
+validation:
+  # Registration success criteria
+  # Note: These thresholds may need adjustment for C3VD medical data
+  reg_success_thresh_rot: 10    # 10 degrees rotation error
+  reg_success_thresh_trans: 0.1  # 0.1 unit translation error
+
+# Device configuration
+device:
+  cuda: True
+  gpu_id: 0
+
+# Logging and checkpointing
+logging:
+  log_interval: 10       # Log every 10 iterations
+  val_interval: 1        # Validate every epoch
+  save_interval: 5       # Save checkpoint every 5 epochs
+  checkpoint_dir: experiments/checkpoints/c3vd_regtr
+
+# Data loading
+dataloader:
+  num_workers: 4
+  pin_memory: True
+  persistent_workers: True
+
+# Random seed for reproducibility
+seed: 1234

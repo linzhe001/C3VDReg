@@ -1,0 +1,129 @@
+{
+  "dataset_id": "ModelNet40",
+  "profile_version": 1,
+  "profile_source": "baseline_config_reference",
+  "data": {
+    "domain": "normalized_object",
+    "coordinate_unit": "unit_cube",
+    "inferred_unit": "unit_scale",
+    "pair_type": "full_to_full",
+    "source_modality": "cad_point_cloud",
+    "target_modality": "cad_point_cloud",
+    "split_policy": "vendor_defined"
+  },
+  "coverage": {
+    "split": "train_test",
+    "category_count": 40,
+    "shape_count": 12311,
+    "train_shape_count": 9843,
+    "test_shape_count": 2468,
+    "scene_count": null,
+    "pair_count_selected": null,
+    "pair_count_measured": null
+  },
+  "geometry": {
+    "source_point_count": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "target_point_count": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "bbox_diag": {
+      "source_p50": 1.0,
+      "target_p50": 1.0,
+      "source_p10": null,
+      "source_p90": null,
+      "target_p10": null,
+      "target_p90": null
+    },
+    "nearest_neighbor_spacing": {
+      "source_p50": null,
+      "target_p50": null,
+      "source_p10": null,
+      "source_p90": null,
+      "target_p10": null,
+      "target_p90": null
+    }
+  },
+  "digests": {
+    "profile_digest": "85d65db4994a640fdd897b6e010deb678a46adbb8868c848d0fe48648f42a669",
+    "manifest_digest": null
+  },
+  "route_hints": {
+    "route": "normalized_object",
+    "normalize_mode": "unit_cube",
+    "typical_sampled_points": [
+      1024,
+      2048
+    ],
+    "repository_reference_points": 1024,
+    "c3vd_transfer_note": "normalized CAD object route is a poor domain match for C3VD endoscopic partial-to-partial scene fragments; use only when the model lacks a metric-scene route or for count/runtime-like parameters."
+  },
+  "evidence": [
+    {
+      "source": "princeton_3dshapenets_modelnet",
+      "url": "https://3dvision.princeton.edu/projects/2014/3DShapeNets/",
+      "supports": [
+        "ModelNet40 download and official train/test split availability"
+      ]
+    },
+    {
+      "source": "common_modelnet40_protocol",
+      "supports": [
+        "12311 CAD models across 40 categories",
+        "9843 train shapes and 2468 test shapes",
+        "common point-cloud baselines sample 1024 or 2048 points from meshes"
+      ]
+    },
+    {
+      "source": "repository_reference_configs",
+      "supports": [
+        "DCP and PointNetLK ModelNet40 routes use 1024 sampled points",
+        "ModelNet-style C3VD fallback uses unit-scale normalization"
+      ]
+    }
+  ],
+  "notes": [
+    "Coverage summary: 12311 CAD models across 40 categories, with 9843 train shapes and 2468 test shapes.",
+    "Common point-cloud route summary: baselines often sample 1024 or 2048 points per object; local DCP/PointNetLK reference routes use 1024.",
+    "ModelNet40 is a full-object CAD classification/source route, not a natural partial scene registration dataset.",
+    "In this benchmark it should be treated as normalized-object evidence, not as a default C3VD route.",
+    "Geometry statistics are route-level assumptions from common sampled-point usage and local reference configs, not local ModelNet40 measurements."
+  ],
+  "pose": {
+    "storage_field": null,
+    "storage_field_present_fraction": null,
+    "pose_source": "unknown",
+    "transform_format": "unknown",
+    "transform_shapes": [],
+    "shape_counts": {},
+    "direction": "unknown",
+    "direction_confidence": "missing_profile_evidence",
+    "translation_unit": "unit_cube",
+    "translation_norm": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "rotation_determinant": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "rotation_orthonormal_error": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "valid_se3_fraction": null,
+    "bottom_row_valid_fraction": null,
+    "checked_record_count": null,
+    "explicit_transform_count": null,
+    "default_identity_count": null,
+    "evidence": []
+  }
+}

@@ -1,0 +1,83 @@
+# Smoke-first configuration for MambaNetLK on C3VD.
+
+dataset:
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  normalize_mode: unit_cube
+  sampling_mode: voxel
+  max_train_pairs: 64
+  max_val_pairs: 64
+
+model:
+  model_type: mambanetlk
+  dim_k: 1024
+  symfn: max
+  max_iter: 3
+  delta: 1.0e-2
+  learn_delta: false
+  lk_mode: cached_reuse_order
+  lm_damping: 1.0e-3
+  dx_clip_norm: 0.25
+  xtol: 1.0e-7
+  p0_zero_mean: true
+  p1_zero_mean: true
+  num_groups: 128
+  group_size: 32
+  trans_dim: 384
+  depth: 4
+  d_state: 64
+  d_conv: 4
+  expand: 2
+  headdim: 64
+  ngroups: 1
+  chunk_size: 128
+  rmsnorm: true
+  drop_path_rate: 0.05
+  drop_out: 0.0
+  grid_size: 0.02
+  pair_dim: 256
+  pair_hidden_dim: 512
+  pair_dropout: 0.0
+  pose_rotation_scale: 1.5708
+  pose_translation_scale: 1.0
+  use_mem_eff_path: true
+
+training:
+  epochs: 1
+  batch_size: 2
+  lr: 0.00001
+  weight_decay: 0.0001
+  optimizer: AdamW
+  num_workers: 2
+  pointnet_tune: true
+  rot_factor: 1.0
+  trans_mag: 0.8
+  loss_mode: pose_geodesic
+  pose_rotation_weight: 16.0
+  pose_translation_weight: 1.0
+  feature_residual_weight: 0.0
+  init_pose_weight: 0.5
+  init_rotation_weight: 16.0
+  init_translation_weight: 1.0
+  grad_clip_norm: 1.0
+  max_loss: null
+  eval_max_loss: null
+  max_skipped_batches: 100
+  skip_nonfinite_loss: true
+  abort_after_nonfinite_steps: 5
+  log_grad_norm: true
+  scheduler_factor: 0.5
+  scheduler_patience: 5
+  scheduler_threshold: 1.0e-4
+  scheduler_threshold_mode: rel
+  scheduler_cooldown: 0
+  min_lr: 1.0e-8
+  max_train_steps: 5
+  max_test_steps: 5
+
+output:
+  checkpoint_dir: experiments/checkpoints/c3vd_mambanetlk_smoke
+  log_dir: experiments/logs/c3vd_mambanetlk_smoke
+
+device: cuda:0

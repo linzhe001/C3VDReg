@@ -1,0 +1,3 @@
+preprocess:
+  profile: legacy_joint_norm_v1
+  seed: 42

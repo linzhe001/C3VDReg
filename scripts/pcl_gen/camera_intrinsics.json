@@ -1,0 +1,17 @@
+{
+  "_comment": "Camera intrinsic parameters",
+  "width": 542,
+  "height": 542,
+  "fx": 542.0,
+  "fy": 542.0,
+  "cx": 271.0,
+  "cy": 271.0,
+  "distortion_coeffs": null,
+  "depth_scale": 10.0,
+  "_notes": {
+    "fx_fy": "Focal lengths in pixels",
+    "cx_cy": "Principal point (optical center)",
+    "distortion_coeffs": "[k1, k2, p1, p2, k3] for radial-tangential model, or null",
+    "depth_scale": "Multiply normalized depth [0,1] by this to get metric depth"
+  }
+}

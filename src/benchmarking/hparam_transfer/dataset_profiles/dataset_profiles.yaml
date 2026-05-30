@@ -1,0 +1,293 @@
+schema_version: 1
+datasets:
+  c3vd_raycasting_v1:
+    dataset_id: c3vd_raycasting_v1
+    profile_version: 1
+    profile_source: measured
+    data:
+      domain: medical_endoscopic_cross_modal
+      coordinate_unit: mm_like
+      inferred_unit: mm_like
+      pair_type: partial_to_partial
+      source_modality: depth_reprojected_point_cloud
+      target_modality: ct_mesh_raycasted_visible_point_cloud
+      split_policy: scene_safe
+    geometry:
+      source_point_count:
+        p10: null
+        p50: null
+        p90: null
+      target_point_count:
+        p10: null
+        p50: null
+        p90: null
+      bbox_diag:
+        source_p50: null
+        target_p50: null
+      nearest_neighbor_spacing:
+        source_p50: null
+        target_p50: null
+    digests:
+      profile_digest: null
+    route_hints:
+      route: medical_endoscopic_mm_like
+      normalize_mode: none
+      preferred_reference_domains:
+        - indoor_metric_scene
+        - local_scene_fragment
+      rejected_reference_domains:
+        - outdoor_lidar
+        - normalized_object
+
+  threedmatch:
+    dataset_id: 3DMatch
+    profile_version: 1
+    profile_source: baseline_config_reference
+    data:
+      domain: indoor_metric_scene
+      coordinate_unit: m
+      inferred_unit: m
+      pair_type: partial_to_partial
+      source_modality: rgbd_reconstructed_fragment
+      target_modality: rgbd_reconstructed_fragment
+      split_policy: vendor_defined_scene_split
+    coverage:
+      split: train_val_test
+      scene_count: 62
+      train_scene_count: 46
+      val_scene_count: 8
+      test_scene_count: 8
+      pair_count_selected: null
+      pair_count_measured: null
+    geometry:
+      source_point_count:
+        p10: null
+        p50: null
+        p90: null
+      target_point_count:
+        p10: null
+        p50: null
+        p90: null
+      bbox_diag:
+        source_p50: null
+        target_p50: null
+      nearest_neighbor_spacing:
+        source_p50: null
+        target_p50: null
+    digests:
+      profile_digest: null
+    route_hints:
+      route: metric_raw
+      normalize_mode: none
+      overlap_range: ">30% for standard 3DMatch registration pairs"
+      low_overlap_companion: 3DLoMatch
+      preferred_for_c3vd_when_model_supports_route: true
+      c3vd_transfer_note: metric indoor fragments are closer to C3VD local scene fragments than normalized object routes, but modality and unit scale still differ.
+    evidence:
+      - source: official_3dmatch_site
+        url: https://3dmatch.cs.princeton.edu/
+        supports:
+          - RGB-D reconstruction fragments
+          - geometric registration benchmark
+          - unified train/test scene assets and split file
+      - source: common_3dmatch_registration_protocol
+        supports:
+          - 62 scenes split into 46 train, 8 validation, and 8 test scenes
+          - standard 3DMatch pairs use overlap greater than 30%
+    notes:
+      - "Coverage summary: 62 scenes split into 46 train, 8 validation, and 8 test scenes."
+      - Standard 3DMatch registration pairs are commonly treated as overlap greater than 30%.
+      - 3DMatch is an indoor RGB-D reconstructed fragment registration route, not an object-level normalized route.
+      - Keep metric-space assumptions unless vendor code explicitly applies private normalization.
+      - Geometry statistics are registry-level reference facts, not measured from local 3DMatch files in this repo.
+
+  threedlomatch:
+    dataset_id: 3DLoMatch
+    profile_version: 1
+    profile_source: baseline_config_reference
+    data:
+      domain: indoor_metric_scene
+      coordinate_unit: m
+      inferred_unit: m
+      pair_type: partial_to_partial
+      source_modality: rgbd_reconstructed_fragment
+      target_modality: rgbd_reconstructed_fragment
+      split_policy: vendor_defined_low_overlap
+    coverage:
+      split: test
+      scene_count: 8
+      train_scene_count: null
+      val_scene_count: null
+      test_scene_count: 8
+      pair_count_selected: null
+      pair_count_measured: null
+    geometry:
+      source_point_count:
+        p10: null
+        p50: null
+        p90: null
+      target_point_count:
+        p10: null
+        p50: null
+        p90: null
+      bbox_diag:
+        source_p50: null
+        target_p50: null
+      nearest_neighbor_spacing:
+        source_p50: null
+        target_p50: null
+    digests:
+      profile_digest: null
+    route_hints:
+      route: metric_raw_low_overlap
+      normalize_mode: none
+      overlap_range: "10%-30%"
+      parent_dataset: 3DMatch
+      preferred_for_c3vd_when_model_supports_route: true
+      c3vd_transfer_note: useful for reasoning about partial-overlap robustness, but it is a harder low-overlap route than standard 3DMatch.
+    evidence:
+      - source: common_3dmatch_registration_protocol
+        supports:
+          - 3DLoMatch is derived from 3DMatch test scenes
+          - 3DLoMatch uses lower-overlap pairs in the 10%-30% range
+    notes:
+      - "Coverage summary: derived from the 8 3DMatch test scenes."
+      - "Low-overlap route summary: commonly treated as 10%-30% overlap pairs."
+      - 3DLoMatch shares the 3DMatch metric indoor scene family but emphasizes low-overlap registration.
+      - Use as robustness evidence only when the baseline exposes a compatible 3DMatch/3DLoMatch route.
+
+  modelnet40:
+    dataset_id: ModelNet40
+    profile_version: 1
+    profile_source: baseline_config_reference
+    data:
+      domain: normalized_object
+      coordinate_unit: unit_cube
+      inferred_unit: unit_scale
+      pair_type: full_to_full
+      source_modality: cad_point_cloud
+      target_modality: cad_point_cloud
+      split_policy: vendor_defined
+    coverage:
+      split: train_test
+      category_count: 40
+      shape_count: 12311
+      train_shape_count: 9843
+      test_shape_count: 2468
+      scene_count: null
+      pair_count_selected: null
+      pair_count_measured: null
+    geometry:
+      source_point_count:
+        p10: null
+        p50: null
+        p90: null
+      target_point_count:
+        p10: null
+        p50: null
+        p90: null
+      bbox_diag:
+        source_p50: 1.0
+        target_p50: 1.0
+      nearest_neighbor_spacing:
+        source_p50: null
+        target_p50: null
+    digests:
+      profile_digest: null
+    route_hints:
+      route: normalized_object
+      normalize_mode: unit_cube
+      typical_sampled_points:
+        - 1024
+        - 2048
+      repository_reference_points: 1024
+      c3vd_transfer_note: normalized CAD object route is a poor domain match for C3VD endoscopic partial-to-partial scene fragments; use only when the model lacks a metric-scene route or for count/runtime-like parameters.
+    evidence:
+      - source: princeton_3dshapenets_modelnet
+        url: https://3dvision.princeton.edu/projects/2014/3DShapeNets/
+        supports:
+          - ModelNet40 download and official train/test split availability
+      - source: common_modelnet40_protocol
+        supports:
+          - 12311 CAD models across 40 categories
+          - 9843 train shapes and 2468 test shapes
+          - common point-cloud baselines sample 1024 or 2048 points from meshes
+      - source: repository_reference_configs
+        supports:
+          - DCP and PointNetLK ModelNet40 routes use 1024 sampled points
+          - ModelNet-style C3VD fallback uses unit-scale normalization
+    notes:
+      - "Coverage summary: 12311 CAD models across 40 categories, with 9843 train shapes and 2468 test shapes."
+      - "Common point-cloud route summary: baselines often sample 1024 or 2048 points per object; local DCP/PointNetLK reference routes use 1024."
+      - ModelNet40 is a full-object CAD classification/source route, not a natural partial scene registration dataset.
+      - In this benchmark it should be treated as normalized-object evidence, not as a default C3VD route.
+      - Geometry statistics are route-level assumptions from common sampled-point usage and local reference configs, not local ModelNet40 measurements.
+
+  kitti:
+    dataset_id: KITTI
+    profile_version: 1
+    profile_source: baseline_config_reference
+    data:
+      domain: outdoor_lidar
+      coordinate_unit: m
+      inferred_unit: m
+      pair_type: partial_to_partial
+      source_modality: lidar_point_cloud
+      target_modality: lidar_point_cloud
+      split_policy: vendor_defined
+    geometry:
+      source_point_count:
+        p10: null
+        p50: null
+        p90: null
+      target_point_count:
+        p10: null
+        p50: null
+        p90: null
+      bbox_diag:
+        source_p50: null
+        target_p50: null
+      nearest_neighbor_spacing:
+        source_p50: null
+        target_p50: null
+    digests:
+      profile_digest: null
+    route_hints:
+      route: outdoor_metric_raw
+      normalize_mode: none
+
+  scannetpp_iphone:
+    dataset_id: ScanNet++_iPhone
+    aliases:
+      - Scannetpp_iphone
+      - scannetpp_iphone
+    profile_version: 1
+    profile_source: baseline_config_reference
+    data:
+      domain: indoor_metric_scene
+      coordinate_unit: m
+      inferred_unit: m
+      pair_type: partial_to_partial
+      source_modality: iphone_reconstruction
+      target_modality: iphone_reconstruction
+      split_policy: vendor_defined
+    geometry:
+      source_point_count:
+        p10: null
+        p50: null
+        p90: null
+      target_point_count:
+        p10: null
+        p50: null
+        p90: null
+      bbox_diag:
+        source_p50: null
+        target_p50: null
+      nearest_neighbor_spacing:
+        source_p50: null
+        target_p50: null
+    digests:
+      profile_digest: null
+    route_hints:
+      route: indoor_metric_scene
+      normalize_mode: none

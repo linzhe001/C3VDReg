@@ -1,0 +1,30 @@
+model:
+  id: mamba3d_mamba2
+  checkpoint_path: null
+  overrides:
+    model_type: mamba3d_mamba2
+    dim_k: 1024
+    symfn: max
+    lk_mode: exact
+    lm_damping: 1.0e-3
+    dx_clip_norm: null
+    max_iter: 10
+    delta: 1.0e-2
+    learn_delta: false
+    xtol: 1.0e-7
+    p0_zero_mean: true
+    p1_zero_mean: true
+    num_groups: 64
+    group_size: 32
+    trans_dim: 384
+    depth: 4
+    d_state: 64
+    d_conv: 4
+    expand: 2
+    headdim: 64
+    ngroups: 1
+    chunk_size: 128
+    rmsnorm: true
+    drop_path_rate: 0.05
+    drop_out: 0.0
+    grid_size: 0.02

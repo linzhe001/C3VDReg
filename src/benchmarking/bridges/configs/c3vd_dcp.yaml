@@ -1,0 +1,66 @@
+# Configuration for training DCP on C3VD dataset
+
+# Dataset configuration
+dataset:
+  name: c3vd
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  normalize_mode: unit_cube
+  gaussian_noise: false
+  rot_factor: 4.0  # Rotation range = ±45 degrees
+  trans_mag: 0.5   # Translation range = ±0.5
+
+# Model configuration (DCP-v2 by default)
+model:
+  name: dcp
+  emb_nn: dgcnn      # Embedding network: dgcnn or pointnet
+  pointer: transformer  # Pointer network: identity or transformer
+  head: svd          # Head: svd
+  emb_dims: 512      # Embedding dimension
+  n_blocks: 1        # Number of attention blocks
+  n_heads: 4         # Number of attention heads
+  ff_dims: 1024      # Feed-forward dimension
+  dropout: 0.0       # Dropout rate
+
+# Training configuration
+training:
+  exp_name: c3vd_dcp_v2
+  batch_size: 48          # Optimized for RTX 5090 (32GB VRAM)
+  num_epochs: 200
+  test_batch_size: 32     # Optimized for RTX 5090
+
+  # Optimizer
+  optimizer: Adam
+  lr: 0.001
+  momentum: 0.9
+
+  # Scheduler
+  scheduler: step
+  lr_decay_epochs: [100, 150]
+  lr_decay_rate: 0.5
+
+  # Device
+  use_cuda: true
+  cuda_device: 0
+
+  # Logging
+  log_interval: 10
+  val_interval: 1
+
+  # Checkpoints
+  save_interval: 10
+  checkpoint_dir: experiments/checkpoints/c3vd_dcp_v2
+
+  # Data loading
+  num_workers: 8          # Increased for faster loading
+
+  # Random seed
+  seed: 1234
+
+# Testing configuration
+testing:
+  pretrained: null  # Path to pretrained model (optional)
+  batch_size: 8
+  num_workers: 4

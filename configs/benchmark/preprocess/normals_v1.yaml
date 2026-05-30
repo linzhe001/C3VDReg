@@ -1,0 +1,3 @@
+preprocess:
+  profile: normals_v1
+  seed: 42

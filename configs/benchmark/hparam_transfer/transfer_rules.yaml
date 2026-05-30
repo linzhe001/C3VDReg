@@ -1,0 +1,119 @@
+schema_version: 1
+protocol_id: dataset_profile_guided_v1
+candidate_limit: 3
+
+reference_selection:
+  score_terms:
+    - domain_match
+    - pair_type_match
+    - coordinate_route_match
+    - normalization_route_match
+    - baseline_native_support
+    - scale_profile_compatibility
+    - object_vs_scene_penalty
+    - outdoor_vs_endoscopic_penalty
+    - missing_config_source_penalty
+  preferred_reference_defaults:
+    dcp:
+      - ModelNet40
+    pointnetlk:
+      - ModelNet40
+    pointnetlk_revisited:
+      - 3DMatch
+    regtr:
+      - 3DMatch
+    geotransformer:
+      - 3DMatch
+    bufferx:
+      - 3DMatch
+      - Scannetpp_iphone
+    mamba3d:
+      - C3VD_PointNetLK_style
+      - ModelNet40
+
+allowed_groups:
+  length_like:
+    - data.voxel_size
+    - data.voxel_size_0
+    - data.voxel_size_1
+    - data.downsample
+    - patch.des_r
+    - patch.search_radius_thresholds
+    - model.matching_radius
+    - model.patch_radius
+    - match.dist_th
+    - match.inlier_th
+    - match.kiss_resolution
+    - eval.acceptance_radius
+    - model.spatial_scale
+    - losses.r_p
+    - losses.r_n
+  density_like:
+    - data.max_numPts
+    - data.num_points
+    - patch.num_points_per_patch
+    - patch.num_fps
+    - patch.num_points_radius_estimate
+    - model.num_points_in_patch
+    - model.neighbor_limits
+  normalization_route:
+    - preprocess.normalize_mode
+    - model.private_normalization_route
+  runtime_sanity:
+    - runtime.batch_size
+    - runtime.num_workers
+    - runtime.memory_safe_point_budget
+  heuristic_control:
+    - heuristic_mode
+    - patch.fixed_des_radii
+
+locked_groups:
+  architecture:
+    - model.backbone_depth
+    - model.hidden_dim
+    - model.embedding_dim
+    - model.attention_heads
+    - model.num_layers
+  optimization:
+    - train.optimizer
+    - train.loss_weights
+    - train.max_steps
+    - train.max_epochs
+  benchmark_policy:
+    - eval.rre_thresh
+    - eval.rte_thresh
+    - benchmark.primary_metric
+
+candidate_policy:
+  allowed_labels:
+    - transferred
+    - kept_from_reference
+    - benchmark_owned
+    - model_private
+    - unsupported_requires_code_change
+    - requires_user_approval
+  expected_candidates:
+    - conservative
+    - default
+    - aggressive
+
+firewall:
+  use_official_test_feedback: false
+  forbid_repeated_test_set_selection: true
+  allow_val_smoke_rejection_only: true
+
+proposal_policy:
+  require_evidence: true
+  require_reference_selection_rationale: true
+  require_cross_profile_compatibility: true
+  reject_locked_changes: true
+  reject_unknown_fields: true
+  require_risk_entries_for_code_change: true
+
+report_policy:
+  include_selected_references: true
+  include_rejected_references: true
+  include_per_parameter_evidence: true
+  include_locked_groups: true
+  include_unsupported_assumptions: true
+  include_next_action: true

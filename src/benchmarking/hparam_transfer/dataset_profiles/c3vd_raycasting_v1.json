@@ -1,0 +1,134 @@
+{
+  "dataset_id": "c3vd_raycasting_v1",
+  "profile_version": 1,
+  "profile_source": "measured",
+  "created_at": null,
+  "data": {
+    "domain": "medical_endoscopic_cross_modal",
+    "coordinate_unit": "mm_like",
+    "inferred_unit": "mm_like",
+    "pair_type": "partial_to_partial",
+    "source_modality": "depth_reprojected_point_cloud",
+    "target_modality": "ct_mesh_raycasted_visible_point_cloud",
+    "split_policy": "scene_safe"
+  },
+  "coverage": {
+    "split": "test",
+    "scene_count": 6,
+    "pair_count_selected": 212,
+    "pair_count_measured": 18,
+    "split_pair_count_full": 2088,
+    "split_pair_count_subset": 212,
+    "sample_frames": [
+      "first",
+      "middle",
+      "last"
+    ]
+  },
+  "geometry": {
+    "source_point_count": {
+      "p10": 19254.4,
+      "p50": 32472.5,
+      "p90": 43386.9
+    },
+    "target_point_count": {
+      "p10": 9649.9,
+      "p50": 14572.5,
+      "p90": 31406.3
+    },
+    "bbox_diag": {
+      "source_p10": 81.36053848266602,
+      "source_p50": 107.09344100952148,
+      "source_p90": 116.20752868652343,
+      "target_p10": 92.43143310546876,
+      "target_p50": 121.99967193603516,
+      "target_p90": 134.89095611572264
+    },
+    "nearest_neighbor_spacing": {
+      "source_p10": 0.6360141396522522,
+      "source_p50": 0.8513259589672089,
+      "source_p90": 1.0084967374801637,
+      "target_p10": 0.7036534667015075,
+      "target_p50": 0.869653195142746,
+      "target_p90": 1.2152980804443358
+    },
+    "density_ratio": {
+      "source_to_target_count_p50": 2.22834105335392
+    }
+  },
+  "pose": {
+    "storage_field": "gt_transform",
+    "storage_field_present_fraction": 0.0,
+    "pose_source": "manifest_default_identity_for_one_to_one",
+    "transform_format": "homogeneous_SE3",
+    "transform_shapes": [
+      "4x4_homogeneous"
+    ],
+    "shape_counts": {
+      "4x4_homogeneous": 18
+    },
+    "direction": "source_to_target",
+    "direction_confidence": "benchmark_manifest_contract",
+    "translation_unit": "mm_like",
+    "translation_norm": {
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
+    },
+    "rotation_determinant": {
+      "p10": 1.0,
+      "p50": 1.0,
+      "p90": 1.0
+    },
+    "rotation_orthonormal_error": {
+      "p10": 0.0,
+      "p50": 0.0,
+      "p90": 0.0
+    },
+    "valid_se3_fraction": 1.0,
+    "bottom_row_valid_fraction": 1.0,
+    "checked_record_count": 18,
+    "explicit_transform_count": 0,
+    "default_identity_count": 18,
+    "evidence": [
+      {
+        "source": "src/benchmarking/manifest_schema.py",
+        "supports": [
+          "validate_manifest_record requires 4x4 gt_transform",
+          "missing one_to_one gt_transform defaults to identity",
+          "ManifestRecord preserves gt_transform for dataset loaders"
+        ]
+      },
+      {
+        "source": "src/benchmarking/metrics/pose_metrics.py",
+        "supports": [
+          "benchmark metrics apply gt_transform to source points",
+          "metrics compare transformed source points in target space",
+          "the benchmark pose contract is source_to_target"
+        ]
+      }
+    ]
+  },
+  "digests": {
+    "manifest_digest": "7cb917972f4fa0ff867e343e344b731be5f8cdb1ae7e8f859f0d03e46cbb5513",
+    "profile_digest": "d9f5d87abbfed0c81085dad06c765bef398f2d7c7a28323896edbf68f569f4e9"
+  },
+  "route_hints": {
+    "preferred_reference_domains": [
+      "indoor_metric_scene",
+      "local_scene_fragment"
+    ],
+    "rejected_reference_domains": [
+      "outdoor_lidar",
+      "normalized_object"
+    ]
+  },
+  "notes": [
+    "declared_point_unit=mm_like",
+    "geometry_consistent_with_declared_unit",
+    "pose_storage_field=gt_transform",
+    "pose_source=manifest_default_identity_for_one_to_one",
+    "pose_transform_shapes=4x4_homogeneous",
+    "pose_direction=source_to_target"
+  ]
+}

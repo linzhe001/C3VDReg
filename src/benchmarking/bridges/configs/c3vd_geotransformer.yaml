@@ -1,0 +1,56 @@
+# Configuration for training GeoTransformer on C3VD.
+
+dataset:
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  sampling_mode: voxel
+  normalize_mode: none
+  frame_stride: 1
+  max_train_pairs: null
+  max_test_pairs: null
+
+  perturbation_enabled: false
+  rotation_deg: 0.0
+  translation_m: 0.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+
+  # Used only when benchmark perturbation is disabled. C3VD source/target
+  # clouds are already in one metric frame, so train needs a synthetic
+  # registration transform.
+  synthetic_rotation_deg: 45.0
+  synthetic_translation_m: 0.5
+
+training:
+  experiment_name: c3vd_geotransformer
+  device: cuda:0
+  seed: 7351
+  batch_size: 1
+  num_workers: 4
+  max_epochs: 40
+  max_train_steps: null
+  max_val_steps: null
+  save_interval: 1
+  validate_every: 1
+  checkpoint_dir: experiments/checkpoints/c3vd_geotransformer
+  log_dir: experiments/logs/c3vd_geotransformer
+  neighbor_limits: [38, 36, 36, 38]
+
+optim:
+  lr: 0.0001
+  lr_decay: 0.95
+  lr_decay_steps: 1
+  weight_decay: 0.000001
+  grad_acc_steps: 1
+
+model:
+  experiment_name: geotransformer.3dmatch.stage4.gse.k3.max.oacl.stage2.sinkhorn
+  # C3VD point clouds are stored in mm-like coordinates, but directly scaling
+  # 3DMatch's 2.5cm voxel by 1000 makes the four-stage pyramid too coarse for
+  # low-point C3VD smoke/profile runs. 100 gives a 2.5mm initial voxel while
+  # still keeping GeoTransformer's metric-space assumptions.
+  spatial_scale: 100.0
+  num_points_in_patch: 4

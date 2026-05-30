@@ -1,0 +1,9 @@
+model:
+  id: pointnetlk
+  checkpoint_path: null
+  overrides:
+    max_iter: 10
+    delta: 0.01
+    dim_k: 1024
+    use_tnet: false
+    symfn: max

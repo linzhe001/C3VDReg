@@ -1,0 +1,32 @@
+# Configuration for training Mamba3D PointNetLK on C3VD dataset
+# Uses unified preprocessing: sampling + baseline-aware model-private normalization
+
+dataset:
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  normalize_mode: unit_cube
+
+model:
+  model_type: mamba3d_v1
+  dim_k: 1024
+  num_mamba_blocks: 1
+  d_state: 8
+  expand: 1.5  # 匹配原始权重（从 192 = 128 * 1.5 推导）
+  max_iter: 20
+  delta: 1.0e-2
+
+training:
+  epochs: 100
+  batch_size: 16
+  lr: 0.001  # Initial learning rate (will be reduced by scheduler)
+  num_workers: 4
+  pointnet_tune: true  # Allow feature extractor updates
+  rot_factor: 1.0      # Rotation magnitude (radians)
+  trans_mag: 0.8       # Translation magnitude
+
+output:
+  checkpoint_dir: experiments/checkpoints/c3vd_mamba3d_unified
+  log_dir: experiments/logs/c3vd_mamba3d_unified
+
+device: cuda:0

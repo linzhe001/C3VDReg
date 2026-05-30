@@ -1,0 +1,41 @@
+benchmark:
+  name: c3vd_raycasting_v1
+  split: test
+  subset_name: null
+  point_unit: mm_like
+  official_track: main
+
+data:
+  manifest_path: /mnt/f/Datasets/C3VD_sever_datasets/c3vd_raycasting_manifest.jsonl
+  subset_config_path: /home/linzhe/PCLR_compare/configs/subset_config.json
+  dataset_root: /mnt/f/Datasets/C3VD_sever_datasets
+
+preprocess:
+  profile: canonical_v1
+  seed: 42
+  sampling_override: null
+  num_points_override: null
+
+perturbation:
+  enabled: true
+  rotation_deg: 45.0
+  translation_m: 0.5
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+
+model:
+  id: dcp
+  checkpoint_path: null
+  overrides:
+    emb_nn: dgcnn
+    pointer: transformer
+    head: svd
+
+runtime:
+  device: cuda:0
+  batch_size: 1
+  num_workers: 0
+  export_html: true
+  output_dir: outputs/benchmark/full_eval
+  train_metadata_path: null

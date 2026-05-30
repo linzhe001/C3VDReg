@@ -1,0 +1,82 @@
+# Configuration for PointNetLK_Revisited training on C3VD dataset
+
+# Dataset configuration
+dataset:
+  name: C3VD
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  normalize_mode: none
+
+  # Data augmentation
+  mag: 0.8  # Magnitude of random SE(3) transformation
+  sigma: 0.0  # Gaussian noise std (0.0 = no noise)
+  clip: 0.0  # Gaussian noise clipping range
+
+# Model configuration
+model:
+  embedding: pointnet  # Feature extraction backbone
+  dim_k: 1024  # Feature dimension
+
+# PointNetLK algorithm configuration
+pointnetlk:
+  max_iter: 10  # Max iterations for LK optimization
+  num_random_points: 100  # Number of random points for Jacobian computation
+  p0_zero_mean: true  # Zero-mean normalization for template
+  p1_zero_mean: true  # Zero-mean normalization for source
+
+# Training configuration
+training:
+  # Checkpoint directory
+  checkpoint_dir: experiments/checkpoints/c3vd_pointnetlk_revisited
+
+  # Training hyperparameters
+  batch_size: 32
+  max_epochs: 200
+  start_epoch: 0
+
+  # Optimizer
+  optimizer: Adam  # Adam or SGD
+  lr: 0.001  # Learning rate
+  decay_rate: 0.0001  # Weight decay
+  grad_clip_norm: null
+
+  # Data loading
+  num_workers: 4
+
+  # Device
+  device: cuda:0
+
+  # Logging
+  log_interval: 10  # Log every N batches
+
+  # Checkpoint saving
+  save_interval: 10  # Save checkpoint every N epochs
+
+  # Stability guard
+  max_loss: null  # Training-only: skip non-finite losses and losses above this value
+  eval_max_loss: null  # Evaluation-only; keep null for honest validation loss
+  max_skipped_batches: 100
+
+  # LR scheduler
+  scheduler_factor: 0.5
+  scheduler_patience: 5
+  scheduler_threshold: 1.0e-4
+  scheduler_threshold_mode: rel
+  scheduler_cooldown: 0
+  min_lr: 1.0e-8
+
+# Testing/Evaluation configuration
+testing:
+  batch_size: 32
+  num_workers: 4
+  device: cuda:0
+
+  # Perturbation settings (if using fixed perturbations)
+  perturbation_file: null  # Path to CSV file with twist parameters
+
+# Resume training
+resume:
+  checkpoint: null  # Path to checkpoint to resume from
+  pretrained: null  # Path to pretrained model weights

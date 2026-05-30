@@ -1,0 +1,28 @@
+model:
+  id: bufferx
+  checkpoint_path: null
+  overrides:
+    normalize_mode: none
+    reference_dataset: 3DMatch
+    heuristic_mode: native
+    sampling_mode: voxel
+    num_points: 8192
+    first_downsample: 0.02
+    second_downsample: 0.035
+    data.downsample: 0.02
+    data.voxel_size_0: 0.035
+    data.voxel_size_1: 0.035
+    data.max_numPts: 30000
+    patch.des_r: 0.3
+    patch.num_points_per_patch: 512
+    patch.num_fps: 1500
+    patch.num_scales: 3
+    patch.search_radius_thresholds: [5, 2, 0.5]
+    patch.num_points_radius_estimate: 2000
+    match.pose_estimator: ransac
+    match.dist_th: 0.10
+    match.inlier_th: 0.3333333333333333
+    match.kiss_resolution: 0.3
+    match.enable_early_exit: false
+    match.early_exit_min_inliers: 50
+    test.pose_refine: true

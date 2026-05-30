@@ -1,0 +1,11 @@
+benchmark:
+  name: c3vd_raycasting_v1
+  split: test
+  subset_name: mvp_stride10
+  point_unit: mm_like
+  official_track: main
+
+data:
+  manifest_path: /mnt/f/Datasets/C3VD_sever_datasets/c3vd_raycasting_manifest.jsonl
+  subset_config_path: /home/linzhe/PCLR_compare/configs/subset_config.json
+  dataset_root: /mnt/f/Datasets/C3VD_sever_datasets

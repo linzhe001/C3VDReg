@@ -1,0 +1,95 @@
+{
+  "dataset_id": "ScanNet++_iPhone",
+  "aliases": [
+    "Scannetpp_iphone",
+    "scannetpp_iphone"
+  ],
+  "profile_version": 1,
+  "profile_source": "baseline_config_reference",
+  "data": {
+    "domain": "indoor_metric_scene",
+    "coordinate_unit": "m",
+    "inferred_unit": "m",
+    "pair_type": "partial_to_partial",
+    "source_modality": "iphone_reconstruction",
+    "target_modality": "iphone_reconstruction",
+    "split_policy": "vendor_defined"
+  },
+  "geometry": {
+    "source_point_count": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "target_point_count": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "bbox_diag": {
+      "source_p50": null,
+      "target_p50": null,
+      "source_p10": null,
+      "source_p90": null,
+      "target_p10": null,
+      "target_p90": null
+    },
+    "nearest_neighbor_spacing": {
+      "source_p50": null,
+      "target_p50": null,
+      "source_p10": null,
+      "source_p90": null,
+      "target_p10": null,
+      "target_p90": null
+    }
+  },
+  "digests": {
+    "profile_digest": "62762b22c9a20606023dbd4d1538aace4aa8a4a73103f31548b79208a52628a4",
+    "manifest_digest": null
+  },
+  "route_hints": {
+    "route": "indoor_metric_scene",
+    "normalize_mode": "none"
+  },
+  "coverage": {
+    "split": "unknown",
+    "scene_count": null,
+    "pair_count_selected": null,
+    "pair_count_measured": null
+  },
+  "notes": [
+    "loaded_from_dataset_profile_registry_stub"
+  ],
+  "pose": {
+    "storage_field": null,
+    "storage_field_present_fraction": null,
+    "pose_source": "unknown",
+    "transform_format": "unknown",
+    "transform_shapes": [],
+    "shape_counts": {},
+    "direction": "unknown",
+    "direction_confidence": "missing_profile_evidence",
+    "translation_unit": "m",
+    "translation_norm": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "rotation_determinant": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "rotation_orthonormal_error": {
+      "p10": null,
+      "p50": null,
+      "p90": null
+    },
+    "valid_se3_fraction": null,
+    "bottom_row_valid_fraction": null,
+    "checked_record_count": null,
+    "explicit_transform_count": null,
+    "default_identity_count": null,
+    "evidence": []
+  }
+}

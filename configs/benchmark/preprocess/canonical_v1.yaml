@@ -1,0 +1,3 @@
+preprocess:
+  profile: canonical_v1
+  seed: 42

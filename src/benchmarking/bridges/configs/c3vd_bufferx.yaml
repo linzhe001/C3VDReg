@@ -1,0 +1,68 @@
+dataset:
+  manifest_path: /home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/c3vd_raycasting_manifest.jsonl
+  dataset_root: /mnt/f/Datasets/C3VD_sever_datasets
+  random_seed: 42
+  sampling_mode: voxel
+  normalize_mode: none
+  num_points: 8192
+  first_downsample: 0.02
+  second_downsample: 0.035
+  max_num_points: 30000
+  heuristic_mode: native
+  perturbation_enabled: true
+  rotation_deg: 45.0
+  translation_m: 0.5
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+
+bufferx:
+  reference_dataset: 3DMatch
+  root_dir: ../datasets
+  data:
+    downsample: 0.02
+    voxel_size_0: 0.035
+    voxel_size_1: 0.035
+    max_numPts: 30000
+  train:
+    epoch: 10
+    max_iter: 50000
+    batch_size: 1
+    num_workers: 0
+    pos_num: 512
+    augmentation_noise: 0.001
+    all_stage: [Desc, Pose]
+  optim:
+    lr:
+      Desc: 0.001
+      Pose: 0.001
+    lr_decay: 0.5
+    weight_decay: 1.0e-6
+    scheduler_interval:
+      Desc: 2
+      Pose: 1
+  patch:
+    des_r: 0.3
+    num_points_per_patch: 512
+    num_fps: 1500
+    num_scales: 3
+    search_radius_thresholds: [5, 2, 0.5]
+    num_points_radius_estimate: 2000
+  match:
+    pose_estimator: ransac
+    dist_th: 0.10
+    inlier_th: 0.3333333333333333
+    similar_th: 0.8
+    confidence: 0.999
+    iter_n: 50000
+    kiss_resolution: 0.3
+    enable_early_exit: false
+    early_exit_min_inliers: 50
+  test:
+    pose_refine: true
+
+training:
+  device: cuda:0
+  checkpoint_dir: outputs/benchmark/bufferx_train_bridge
+  tensorboard_dir: outputs/benchmark/bufferx_train_bridge/tensorboard
+  log_dir: outputs/benchmark/bufferx_train_bridge/logs

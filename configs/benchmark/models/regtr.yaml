@@ -1,0 +1,8 @@
+model:
+  id: regtr
+  checkpoint_path: null
+  overrides:
+    d_embed: 256
+    nhead: 8
+    d_feedforward: 1024
+    num_encoder_layers: 6

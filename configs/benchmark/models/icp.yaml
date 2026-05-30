@@ -1,0 +1,6 @@
+model:
+  id: icp
+  checkpoint_path: null
+  overrides:
+    max_iter: 50
+    ftol: 1.0e-7

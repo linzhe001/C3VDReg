@@ -1,0 +1,11 @@
+model:
+  id: mamba3d
+  checkpoint_path: null
+  overrides:
+    model_type: mamba3d_v1
+    dim_k: 1024
+    max_iter: 20
+    delta: 1.0e-2
+    num_mamba_blocks: 1
+    d_state: 8
+    expand: 1.5

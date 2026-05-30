@@ -1,0 +1,115 @@
+# Model Weights Configuration
+# This file specifies the exact weight paths for all algorithms on both datasets
+# Used by unified testing pipeline
+
+# ============================================================================
+# PointNetLK_c3vd fork (Mamba3D backbone)
+# ============================================================================
+pointnetlk_c3vd:
+  c3vd:
+    # Single checkpoint (Mamba3D, resumed training)
+    model_path: experiments/checkpoints/c3vd_pointnetlk_c3vd/mamba3d_pointlk_resume_0706_0435_model_best.pth
+    training_type: single_stage
+    backbone: mamba3d
+
+  modelnet40:
+    # Two-stage training checkpoints
+    classifier_feat_path: forks/PointNetLK_c3vd/results/modelnet40/mamba3d_classifier_20251021_0935_feat_best.pth
+    classifier_model_path: forks/PointNetLK_c3vd/results/modelnet40/mamba3d_classifier_20251021_0935_model_best.pth
+    model_path: forks/PointNetLK_c3vd/results/modelnet40/mamba3d_pointlk_20251021_0935_model_best.pth
+    snapshot_path: forks/PointNetLK_c3vd/results/modelnet40/mamba3d_pointlk_20251021_0935_snap_best.pth
+    training_type: two_stage
+    backbone: mamba3d
+
+# ============================================================================
+# PointNetLK (Original CVPR 2019)
+# ============================================================================
+pointnetlk:
+  c3vd:
+    # Two-stage training checkpoints
+    classifier_feat_path: experiments/checkpoints/c3vd_pointnetlk/c3vd_pointnetlk_classifier_feat_best.pth
+    classifier_model_path: experiments/checkpoints/c3vd_pointnetlk/c3vd_pointnetlk_classifier_model_best.pth
+    model_path: experiments/checkpoints/c3vd_pointnetlk/c3vd_pointnetlk_model_model_best.pth
+    snapshot_path: experiments/checkpoints/c3vd_pointnetlk/c3vd_pointnetlk_model_snap_best.pth
+    training_type: two_stage
+    backbone: pointnet
+
+  modelnet40:
+    # Two-stage training checkpoints
+    classifier_feat_path: baselines/PointNetLK/results/modelnet40/classifier_20251020_1546_feat_best.pth
+    classifier_model_path: baselines/PointNetLK/results/modelnet40/classifier_20251020_1546_model_best.pth
+    model_path: baselines/PointNetLK/results/modelnet40/pointlk_20251020_1546_model_best.pth
+    snapshot_path: baselines/PointNetLK/results/modelnet40/pointlk_20251020_1546_snap_best.pth
+    training_type: two_stage
+    backbone: pointnet
+
+# ============================================================================
+# PointNetLK_Revisited (CVPR 2021)
+# ============================================================================
+pointnetlk_revisited:
+  c3vd:
+    # Single-stage training checkpoint
+    model_path: experiments/checkpoints/c3vd_pointnetlk_revisited/pointnetlk_c3vd_model_best.pth
+    snapshot_path: experiments/checkpoints/c3vd_pointnetlk_revisited/pointnetlk_c3vd_snap_last.pth
+    training_type: single_stage
+    epochs_trained: 200
+    backbone: pointnet_revisited
+
+  modelnet40:
+    # Author's pre-trained checkpoint
+    model_path: baselines/PointNetLK_Revisited/logs/model_trained_on_ModelNet40_model_best.pth
+    training_type: single_stage
+    source: author_pretrained
+    backbone: pointnet_revisited
+
+# ============================================================================
+# DCP (Deep Closest Point, ICCV 2019)
+# ============================================================================
+dcp:
+  c3vd:
+    # DCP-v2 trained checkpoint
+    model_path: experiments/checkpoints/c3vd_dcp_v2/models/model_best.pth
+    training_type: single_stage
+    variant: dcp_v2
+    epochs_trained: 200
+    config:
+      emb_nn: dgcnn
+      pointer: transformer
+      head: svd
+
+  modelnet40:
+    # Author's pre-trained checkpoints
+    dcp_v1_path: baselines/dcp/pretrained/dcp_v1.t7  # identity pointer
+    dcp_v2_path: baselines/dcp/pretrained/dcp_v2.t7  # transformer pointer
+    model_path: baselines/dcp/pretrained/dcp_v2.t7   # default to v2
+    training_type: single_stage
+    source: author_pretrained
+    variant: dcp_v2
+    config:
+      emb_nn: dgcnn
+      pointer: transformer
+      head: svd
+
+# ============================================================================
+# Usage Notes
+# ============================================================================
+#
+# Two-stage training (PointNetLK variants):
+#   1. Load classifier_feat_path for feature extractor weights
+#   2. Load model_path for registration model weights
+#
+# Single-stage training (PointNetLK_Revisited, DCP):
+#   1. Load model_path directly
+#
+# DCP variants:
+#   - dcp_v1: DGCNN + identity pointer + SVD (faster, 1.2M)
+#   - dcp_v2: DGCNN + transformer pointer + SVD (better, 22M)
+#
+# File formats:
+#   - .pth: PyTorch format (PointNetLK variants, PointNetLK_Revisited)
+#   - .t7: Torch format (DCP pre-trained models)
+#
+# All paths are relative to repository root: /home/linzhe/PCLR_compare/
+# Note: checkpoints/ is now at experiments/checkpoints/
+# Baseline dirs (dcp/, PointNetLK/, PointNetLK_Revisited/) are now under baselines/
+# PointNetLK_c3vd is now kept under forks/PointNetLK_c3vd/

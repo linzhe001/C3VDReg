@@ -1,0 +1,35 @@
+schema_version: 1
+model: dcp
+reference_dataset: ModelNet40
+route: normalized_object
+source_kind: vendor_default_stub
+source_evidence:
+  - path: baselines/dcp/main.py
+    fields:
+      - parser.add_argument('--num_points', default=1024)
+      - parser.add_argument('--emb_dims', default=512)
+      - parser.add_argument('--pointer', default='transformer')
+      - parser.add_argument('--head', default='svd')
+      - parser.add_argument('--factor', default=4)
+  - path: baselines/dcp/data.py
+    fields:
+      - ModelNet40 pointcloud = self.data[item][:self.num_points]
+      - ModelNet40 translation_ab sampled from uniform(-0.5, 0.5)
+data:
+  num_points: 1024
+  coordinate_unit: unit_scale
+  pair_type: full_to_full
+  rotation_factor: 4
+  translation_range: 0.5
+model:
+  emb_nn: dgcnn
+  pointer: transformer
+  head: svd
+  emb_dims: 512
+  n_blocks: 1
+  n_heads: 4
+  ff_dims: 1024
+  dropout: 0.0
+  cycle: false
+preprocess:
+  normalize_mode: unit_cube

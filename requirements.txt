@@ -1,0 +1,72 @@
+# PCLR_compare Unified Requirements
+# This file contains all dependencies for DCP and RegTR integration with C3VD dataset
+
+# ==============================================================================
+# Core Dependencies (Required)
+# ==============================================================================
+torch>=1.9.0
+numpy>=1.19.0
+scipy>=1.5.0
+
+# ==============================================================================
+# Data Processing (Required)
+# ==============================================================================
+h5py>=2.10.0
+plyfile>=0.7.0
+PyYAML>=5.3.0
+
+# ==============================================================================
+# Training & Logging (Required)
+# ==============================================================================
+tqdm>=4.50.0
+tensorboardX>=2.1
+tensorboard>=2.4.0
+
+# ==============================================================================
+# DCP Dependencies (Required for DCP training)
+# ==============================================================================
+# All above dependencies are sufficient for DCP
+
+# ==============================================================================
+# RegTR Dependencies (Required for RegTR training)
+# ==============================================================================
+open3d>=0.13.0          # For overlap computation
+easydict>=1.9           # For config management
+coloredlogs>=15.0       # For colored logging
+
+# ==============================================================================
+# RegTR Advanced Dependencies (Optional - for full RegTR features)
+# ==============================================================================
+# pytorch3d>=0.6.0      # Uncomment if needed (requires specific CUDA version)
+# MinkowskiEngine>=0.5  # Uncomment if needed (requires compilation)
+# vtk==9.0.3            # Uncomment if needed (for visualization)
+
+# ==============================================================================
+# Additional Utilities (Optional)
+# ==============================================================================
+GitPython>=3.1.0        # For version tracking
+nibabel>=3.2.0          # For medical imaging formats (optional)
+
+# ==============================================================================
+# Installation Instructions
+# ==============================================================================
+# 1. Activate conda environment:
+#    conda activate PCLR_compare
+#
+# 2. Install basic dependencies (DCP + C3VD integration):
+#    pip install -r requirements.txt
+#
+# 3. For RegTR training, also compile KPConv C++ extensions:
+#    cd RegTR/src/models/backbone_kpconv/cpp_wrappers
+#    bash compile_wrappers.sh
+#
+# 4. Verify installation:
+#    python verify_env.py
+#
+# ==============================================================================
+# Notes
+# ==============================================================================
+# - PyTorch3D and MinkowskiEngine require specific CUDA versions
+# - Install them separately if needed for full RegTR functionality
+# - KPConv C++ extensions must be compiled for RegTR to work
+# - Open3D is required for RegTR's overlap computation

@@ -1,0 +1,22 @@
+# Python/runtime cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Local editor/OS files
+.DS_Store
+*.swp
+
+# Local-only raw datasets and scratch outputs
+data/
+datasets/
+raw_data/
+tmp/
+temp/
+scripts/pcl_gen/tmp*
+
+# Environment-local files
+.env
+.venv/
+venv/

@@ -12,6 +12,7 @@ __pycache__/
 *.md
 !/README.md
 !/src/benchmarking/hparam_transfer/SKILL.md
+/SELECTED_CHECKPOINTS.csv
 
 # Local-only raw datasets and scratch outputs
 data/

@@ -35,9 +35,8 @@ Remote repository contents:
 
 - `configs/`: benchmark dataset, preprocess, model, paper evaluation, 0-200 epoch training, and HPT config files.
 - `manifests/`: portable C3VDReg manifest with paths relative to `data.dataset_root`.
-- `outputs/`: selected YAML config snapshots only.
 - `requirements.txt`: Python dependency list.
-- `scripts/`: train/eval entry points and benchmark analysis scripts.
+- `scripts/`: train/eval entry points, manifest builder, and minimal HPT helper CLIs.
 - `src/`: benchmark runners, adapters, preprocessing, metrics, reporting, HPT utilities, and shared utilities.
 - `README.md`: BMVC2026 paper companion instructions.
 

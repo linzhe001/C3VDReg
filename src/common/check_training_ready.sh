@@ -199,14 +199,14 @@ if [ $ERRORS -eq 0 ] && [ $WARNINGS -eq 0 ]; then
     echo -e "${GREEN}✓ 所有检查通过！可以开始训练。${NC}"
     echo ""
     echo -e "${BLUE}启动训练命令:${NC}"
-    echo -e "  python scripts/benchmark/launch_train_rollout.py --audit outputs/benchmark/train_rollout_audit/train_rollout_audit.json --ready-only"
+    echo -e "  python scripts/runners/train_benchmark.py --config configs/benchmark/train_r90_t500mm_0_200epoch/train_geotransformer.yaml"
     echo ""
     exit 0
 elif [ $ERRORS -eq 0 ]; then
     echo -e "${YELLOW}⚠ 发现 $WARNINGS 个警告，但可以继续训练。${NC}"
     echo ""
     echo -e "${BLUE}启动训练命令:${NC}"
-    echo -e "  python scripts/benchmark/launch_train_rollout.py --audit outputs/benchmark/train_rollout_audit/train_rollout_audit.json --ready-only"
+    echo -e "  python scripts/runners/train_benchmark.py --config configs/benchmark/train_r90_t500mm_0_200epoch/train_geotransformer.yaml"
     echo ""
     exit 0
 else

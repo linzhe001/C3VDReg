@@ -20,17 +20,13 @@ datasets/
 raw_data/
 tmp/
 temp/
-scripts/pcl_gen/tmp*
 
 # External baseline source trees are cloned by the user and kept out of this repo.
 /baselines/*
 /forks/PointNetLK_c3vd/
 
-# Runtime outputs are local-only. Keep only YAML config snapshots under outputs/.
-/outputs/**/*
-!/outputs/**/
-!/outputs/**/*.yaml
-!/outputs/**/*.yml
+# Runtime outputs are local-only.
+/outputs/
 
 # Manuscript drafts and generated paper artifacts are local-only.
 /BMVC2026_Linzhe/

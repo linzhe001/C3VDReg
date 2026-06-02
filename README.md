@@ -1,7 +1,6 @@
 # C3VDReg
 
-Dataset: https://doi.org/10.5522/04/30640043
-Checkpoints: https://huggingface.co/linzher/C3VDReg-checkpoints
+Dataset and checkpoint download links are withheld during double-blind review and will be released after the review period.
 
 This repository is the code/configuration companion for the BMVC2026 paper, titled `C3VDReg: A Benchmark for Local-to-Local Colonoscopic Registration toward Anatomical Localization`.
 
@@ -54,7 +53,7 @@ Install the PyTorch build that matches the local CUDA driver before running GPU 
 
 ## Data
 
-Download the C3VDReg data from https://doi.org/10.5522/04/30640043.
+The C3VDReg data release link is withheld during double-blind review and will be released after the review period.
 
 The committed manifest uses relative paths, for example:
 
@@ -90,7 +89,7 @@ Keep cloned baselines as independent repositories. Do not vendor their source tr
 
 ## Checkpoints
 
-Download the checkpoint bundle from the Google Drive link at the top of this README, then copy its contents into `checkpoints/` before evaluation:
+The checkpoint bundle release link is withheld during double-blind review and will be released after the review period. After obtaining the released bundle, copy its contents into `checkpoints/` before evaluation:
 
 ```bash
 mkdir -p checkpoints
@@ -179,6 +178,6 @@ Main-table comparisons should use:
 - `configs/benchmark/paper_r25_90_t100_500mm/eval_*.yaml`
 - `configs/benchmark/train_r90_t500mm_0_200epoch/train_*.yaml` when retraining
 - `configs/benchmark/preprocess/canonical_v1.yaml`
-- checkpoints restored from the Google Drive checkpoint bundle
+- checkpoints restored from the released checkpoint bundle
 
 Do not compare methods under different point budgets, perturbation ranges, pose conventions, or private preprocessing unless the result is explicitly labeled as a separate diagnostic rather than a BMVC main-protocol result.

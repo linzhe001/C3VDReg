@@ -8,6 +8,10 @@ __pycache__/
 .DS_Store
 *.swp
 
+# Keep project documentation centralized in the root README.md.
+*.md
+!/README.md
+
 # Local-only raw datasets and scratch outputs
 data/
 datasets/
@@ -18,7 +22,6 @@ scripts/pcl_gen/tmp*
 
 # External baseline source trees are cloned by the user and kept out of this repo.
 /baselines/*
-!/baselines/README.md
 /forks/PointNetLK_c3vd/
 
 # Runtime outputs are local-only. Keep only YAML config snapshots under outputs/.
@@ -32,7 +35,6 @@ scripts/pcl_gen/tmp*
 
 # Checkpoints are distributed out-of-band and restored under checkpoints/.
 /checkpoints/*
-!/checkpoints/README.md
 *.ckpt
 *.pt
 *.pth

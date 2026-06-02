@@ -31,8 +31,12 @@ __pycache__/
 # Manuscript drafts and generated paper artifacts are local-only.
 /BMVC2026_Linzhe/
 
-# Checkpoints are distributed out-of-band and restored under checkpoints/.
+# Checkpoints are distributed out-of-band except the committed GeoTransformer
+# tiny smoke-test checkpoint shards. The runnable .pth is reassembled locally.
 /checkpoints/*
+!/checkpoints/geotransformer/
+!/checkpoints/geotransformer/geotransformer_c3vd_model_best.pth.parts/
+!/checkpoints/geotransformer/geotransformer_c3vd_model_best.pth.parts/*
 *.ckpt
 *.pt
 *.pth

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
@@ -19,6 +20,13 @@ DEFAULT_CONFIG = REPO_ROOT / "configs" / "benchmark" / "tiny_8192" / (
 DEFAULT_CHECKPOINT_TARGET = REPO_ROOT / "checkpoints" / "geotransformer" / (
     "geotransformer_c3vd_model_best.pth"
 )
+DEFAULT_CHECKPOINT_PARTS_DIR = DEFAULT_CHECKPOINT_TARGET.with_suffix(
+    DEFAULT_CHECKPOINT_TARGET.suffix + ".parts"
+)
+COMMITTED_CHECKPOINT_SHA256 = (
+    "1b48e3098b931d461e6c2466d295ea82ad14868987335d83f049c5342adb1863"
+)
+COMMITTED_CHECKPOINT_SIZE = 118_305_473
 LOCAL_CHECKPOINT_CANDIDATES = (
     REPO_ROOT.parent
     / "C3VDReg_checkpoint"
@@ -65,6 +73,48 @@ def run_command(command: list[str], cwd: Path | None = None) -> None:
     else:
         print(f"$ {display}")
     subprocess.run(command, cwd=cwd, check=True)
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def verify_committed_checkpoint(path: Path) -> None:
+    size = path.stat().st_size
+    if size != COMMITTED_CHECKPOINT_SIZE:
+        raise RuntimeError(
+            "Unexpected GeoTransformer checkpoint size: "
+            f"{path} has {size} bytes, expected {COMMITTED_CHECKPOINT_SIZE}."
+        )
+    digest = sha256_file(path)
+    if digest != COMMITTED_CHECKPOINT_SHA256:
+        raise RuntimeError(
+            "Unexpected GeoTransformer checkpoint SHA256: "
+            f"{path} has {digest}, expected {COMMITTED_CHECKPOINT_SHA256}."
+        )
+
+
+def assemble_checkpoint_from_parts(parts_dir: Path, target: Path) -> Path:
+    if not parts_dir.exists():
+        raise FileNotFoundError(f"Checkpoint shard directory not found: {parts_dir}")
+    parts = sorted(parts_dir.glob("part-*"))
+    if not parts:
+        raise FileNotFoundError(f"No checkpoint shards found under: {parts_dir}")
+
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temp_target = target.with_name(target.name + ".tmp")
+    with temp_target.open("wb") as output:
+        for part in parts:
+            with part.open("rb") as input_file:
+                shutil.copyfileobj(input_file, output, length=1024 * 1024)
+    temp_target.replace(target)
+    verify_committed_checkpoint(target)
+    print(f"Assembled GeoTransformer checkpoint from shards: {parts_dir}")
+    return target
 
 
 def ensure_baseline_repo(args: argparse.Namespace) -> Path:
@@ -114,33 +164,50 @@ def ensure_baseline_repo(args: argparse.Namespace) -> Path:
 def resolve_checkpoint(args: argparse.Namespace) -> Path:
     target = Path(args.checkpoint_target).expanduser().resolve()
     explicit = Path(args.checkpoint).expanduser().resolve() if args.checkpoint else None
+    parts_dir = target.with_suffix(target.suffix + ".parts")
+    if target == DEFAULT_CHECKPOINT_TARGET.resolve():
+        parts_dir = DEFAULT_CHECKPOINT_PARTS_DIR
 
     if args.no_copy_checkpoint:
         if not target.exists():
             raise FileNotFoundError(f"Checkpoint not found: {target}")
+        if parts_dir.exists():
+            verify_committed_checkpoint(target)
         return target
 
-    source_candidates = []
-    if explicit is not None:
-        source_candidates.append(explicit)
-    source_candidates.extend(LOCAL_CHECKPOINT_CANDIDATES)
-
     if target.exists():
+        if parts_dir.exists():
+            verify_committed_checkpoint(target)
         print(f"GeoTransformer checkpoint found: {target}")
         return target
 
+    if explicit is not None:
+        if not explicit.exists():
+            raise FileNotFoundError(f"Checkpoint not found: {explicit}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(explicit, target)
+        print(f"Copied GeoTransformer checkpoint:\n  from {explicit}\n  to   {target}")
+        return target
+
+    if parts_dir.exists():
+        return assemble_checkpoint_from_parts(parts_dir, target)
+
+    source_candidates = list(LOCAL_CHECKPOINT_CANDIDATES)
     source = next((path for path in source_candidates if path.exists()), None)
     if source is None:
         searched = "\n".join(str(path) for path in source_candidates)
         raise FileNotFoundError(
             "GeoTransformer checkpoint is missing. Restore the released checkpoint "
-            "bundle or pass --checkpoint.\nSearched:\n"
+            "bundle, pass --checkpoint, or keep the committed checkpoint shards.\n"
+            "Searched:\n"
             f"{searched}\nTarget path:\n{target}"
         )
 
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, target)
     print(f"Copied GeoTransformer checkpoint:\n  from {source}\n  to   {target}")
+    if parts_dir.exists():
+        verify_committed_checkpoint(target)
     return target
 
 

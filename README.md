@@ -1,6 +1,6 @@
 # C3VDReg
 
-Full dataset and checkpoint download links are withheld during double-blind review and will be released after the review period. A tiny 8,192-point smoke-test subset is committed for interface checks only.
+Full dataset and checkpoint download links are withheld during double-blind review and will be released after the review period. A tiny 8,192-point smoke-test subset and one GeoTransformer smoke-test checkpoint shard bundle are committed for interface checks only.
 
 This repository is the code/configuration companion for the BMVC2026 paper, titled `C3VDReg: A Benchmark for Local-to-Local Colonoscopic Registration toward Anatomical Localization`.
 
@@ -64,21 +64,22 @@ python scripts/runners/eval_benchmark.py \
   --config configs/benchmark/tiny_8192/eval_icp.yaml
 ```
 
-Run the tiny GeoTransformer checkpoint evaluation after restoring the released
-GeoTransformer checkpoint. Run this from the C3VDReg Python environment:
+Run the tiny GeoTransformer checkpoint evaluation from the C3VDReg Python
+environment:
 
 ```bash
-python scripts/runners/eval_geotransformer_tiny.py \
-  --checkpoint /path/to/geotransformer_c3vd_model_best.pth \
-  --build-baseline
+python scripts/runners/eval_geotransformer_tiny.py --build-baseline
 ```
 
 The script clones the original GeoTransformer repository into
-`baselines/GeoTransformer` if it is missing, keeps that external repository
-untracked, copies the checkpoint to
+`baselines/GeoTransformer` if it is missing and keeps that external repository
+untracked. It reassembles the committed checkpoint shards under
+`checkpoints/geotransformer/geotransformer_c3vd_model_best.pth.parts/` into
+the ignored local file
 `checkpoints/geotransformer/geotransformer_c3vd_model_best.pth`, runs
 `configs/benchmark/tiny_8192/eval_geotransformer.yaml`, and writes local result
-tables plus visualizations under `outputs/benchmark/tiny_8192/geotransformer_eval/`.
+tables plus visualizations under
+`outputs/benchmark/tiny_8192/geotransformer_eval/`.
 The external baseline source is the original GeoTransformer code repository:
 `https://github.com/qinzheng93/GeoTransformer`.
 
@@ -116,7 +117,9 @@ Keep cloned baselines as independent repositories. Do not vendor their source tr
 
 ## Checkpoints
 
-The checkpoint bundle release link is withheld during double-blind review and will be released after the review period. After obtaining the released bundle, copy its contents into `checkpoints/` before evaluation:
+The full checkpoint bundle release link is withheld during double-blind review and will be released after the review period. This repository commits only the GeoTransformer tiny smoke-test checkpoint as shards under `checkpoints/geotransformer/geotransformer_c3vd_model_best.pth.parts/`; `scripts/runners/eval_geotransformer_tiny.py` reassembles those shards into the ignored local `.pth` file automatically.
+
+After obtaining the released full checkpoint bundle, copy its contents into `checkpoints/` before paper-protocol evaluation:
 
 ```bash
 mkdir -p checkpoints

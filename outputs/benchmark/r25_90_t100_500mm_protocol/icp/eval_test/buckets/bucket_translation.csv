@@ -1,2 +1,0 @@
-bucket_key,bucket_value,count,registration_recall@rre_5deg_rte_5mm,rot_hit_5deg_rate,trans_hit_5mm_rate,rre_deg_mean,rte_mm_mean,latency_ms_mean,visible_nn_mean_mm_mean
-translation_bin,10+mm,2088,0.05459770114942529,0.21120689655172414,0.05699233716475096,54.62425719517512,217.21087490026255,787.7219586722185,3.152899581822806

@@ -1,0 +1,143 @@
+general:
+  expt_name: benchmark_full_regtr
+dataset:
+  dataset: c3vd
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  normalize_mode: none
+  augment_noise: 0.0
+  perturb_pose: null
+  train_batch_size: 2
+  val_batch_size: 2
+  test_batch_size: 1
+  overlap_radius: 3.75
+  train_scenes:
+  - cecum_t2_a
+  - cecum_t2_b
+  - cecum_t2_c
+  - cecum_t4_a
+  - cecum_t4_b
+  - desc_t4_a
+  - sigmoid_t1_a
+  - sigmoid_t2_a
+  - trans_t1_b
+  - trans_t2_a
+  - trans_t2_c
+  - trans_t3_a
+  - trans_t3_b
+  val_scenes:
+  - cecum_t1_b
+  - sigmoid_t3_a
+  - trans_t4_b
+  test_scenes:
+  - cecum_t1_a
+  - cecum_t3_a
+  - sigmoid_t3_b
+  - trans_t1_a
+  - trans_t2_b
+  - trans_t4_a
+  sampling_mode: voxel
+  perturbation_enabled: true
+  rotation_deg: 90.0
+  translation_m: 500.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+  frame_stride: 1
+  max_train_pairs: null
+  max_val_pairs: null
+  max_test_pairs: null
+train_options:
+  niter: 148800
+solver:
+  optimizer: AdamW
+  base_lr: 5.0e-05
+  weight_decay: 0.0001
+  grad_clip: 0.1
+  scheduler: step
+  scheduler_param:
+  - 50000
+  - 0.5
+kpconv_options:
+  num_layers: 4
+  neighborhood_limits:
+  - 40
+  - 40
+  - 40
+  - 40
+  aggregation_mode: sum
+  first_subsampling_dl: 2.5
+  first_feats_dim: 128
+  fixed_kernel_points: center
+  in_feats_dim: 1
+  in_points_dim: 3
+  conv_radius: 2.5
+  deform_radius: 5.0
+  KP_extent: 2.0
+  KP_influence: linear
+  overlap_radius: 3.75
+  use_batch_norm: true
+  batch_norm_momentum: 0.02
+  modulated: false
+  num_kernel_points: 15
+  architecture:
+  - simple
+  - resnetb
+  - resnetb_strided
+  - resnetb
+  - resnetb
+  - resnetb_strided
+  - resnetb
+  - resnetb
+  - resnetb_strided
+  - resnetb
+  - resnetb
+model:
+  model: regtr.RegTR
+  attention_type: dot_prod
+  nhead: 8
+  d_embed: 256
+  d_feedforward: 1024
+  dropout: 0.0
+  pre_norm: true
+  transformer_act: relu
+  num_encoder_layers: 6
+  transformer_encoder_has_pos_emb: true
+  sa_val_has_pos_emb: true
+  ca_val_has_pos_emb: true
+  pos_emb_type: sine
+  corr_decoder_has_pos_emb: true
+  direct_regress_coor: true
+losses:
+  wt_overlap: 1.0
+  overlap_loss_pyr: 3
+  overlap_loss_on:
+  - 5
+  wt_feature: 0.1
+  wt_feature_un: 0.0
+  r_p: 20.0
+  r_n: 40.0
+  feature_loss_on:
+  - 5
+  feature_loss_type: infonce
+  wt_corr: 1.0
+  corr_loss_on:
+  - 5
+validation:
+  reg_success_thresh_rot: 10
+  reg_success_thresh_trans: 10.0
+device:
+  cuda: true
+  gpu_id: 0
+logging:
+  log_interval: 10
+  val_interval: 1
+  save_interval: 5
+  checkpoint_dir: experiments/checkpoints/c3vd_regtr
+dataloader:
+  num_workers: 4
+  pin_memory: true
+  persistent_workers: true
+seed: 1234

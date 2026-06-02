@@ -1,4 +1,0 @@
-cecum
-desc
-sigmoid
-trans

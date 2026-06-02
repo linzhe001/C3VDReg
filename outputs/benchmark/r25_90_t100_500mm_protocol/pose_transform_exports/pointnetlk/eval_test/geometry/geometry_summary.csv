@@ -1,2 +1,0 @@
-model_id,preprocess_profile_id,visible_nn_mean_mm_mean,visible_nn_p90_mm_p90,trimmed_chamfer_mm_mean
-pointnetlk,canonical_v1,6.351461462371295,,6.836062539528243

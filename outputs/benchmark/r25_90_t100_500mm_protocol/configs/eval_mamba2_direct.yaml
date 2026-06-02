@@ -5,8 +5,8 @@ benchmark:
   point_unit: mm_like
   official_track: main
 data:
-  manifest_path: /home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/c3vd_raycasting_manifest.jsonl
-  subset_config_path: /home/linzhe/PCLR_compare/configs/subset_config.json
+  manifest_path: manifests/c3vd_raycasting_v1.jsonl
+  subset_config_path: configs/subset_config.json
   dataset_root: /mnt/f/Datasets/C3VD_sever_datasets
 preprocess:
   profile: canonical_v1
@@ -15,7 +15,7 @@ preprocess:
   num_points_override: 8192
 model:
   id: mamba3d_mamba2_direct
-  checkpoint_path: /home/linzhe/PCLR_compare/outputs/benchmark/mamba2_followup_point_order_pair_initializer/direct_sort_xyz_e5/train/train_bridge/mamba3d_pointlk_model_best.pth
+  checkpoint_path: /home/linzhe/PCLR_compare/checkpoints/mamba3d_mamba2_direct/mamba3d_pointlk_model_best.pth
   overrides:
     normalize_mode: unit_cube
     model_type: mamba3d_mamba2_direct

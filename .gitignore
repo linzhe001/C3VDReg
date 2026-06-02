@@ -16,6 +16,25 @@ tmp/
 temp/
 scripts/pcl_gen/tmp*
 
+# External baseline source trees are cloned by the user and kept out of this repo.
+/baselines/*
+!/baselines/README.md
+/forks/PointNetLK_c3vd/
+
+# Runtime outputs are local-only. Keep only YAML config snapshots under outputs/.
+/outputs/**/*
+!/outputs/**/
+!/outputs/**/*.yaml
+!/outputs/**/*.yml
+
+# Checkpoints are distributed out-of-band and restored under checkpoints/.
+/checkpoints/*
+!/checkpoints/README.md
+*.ckpt
+*.pt
+*.pth
+*.pth.tar
+
 # Environment-local files
 .env
 .venv/

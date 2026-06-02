@@ -1,5 +1,5 @@
 dataset:
-  manifest_path: /home/linzhe/PCLR_compare/outputs/benchmark/flow_check_eval/c3vd_raycasting_manifest.jsonl
+  manifest_path: manifests/c3vd_raycasting_v1.jsonl
   dataset_root: /mnt/f/Datasets/C3VD_sever_datasets
   random_seed: 42
   sampling_mode: voxel

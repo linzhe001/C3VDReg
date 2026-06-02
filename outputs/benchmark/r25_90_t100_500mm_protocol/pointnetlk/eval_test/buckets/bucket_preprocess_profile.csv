@@ -1,2 +1,0 @@
-bucket_key,bucket_value,count,registration_recall@rre_5deg_rte_5mm,rot_hit_5deg_rate,trans_hit_5mm_rate,rre_deg_mean,rte_mm_mean,latency_ms_mean,visible_nn_mean_mm_mean
-preprocess_profile_id,canonical_v1,2088,0.0014367816091954023,0.027298850574712645,0.0019157088122605363,47.07049291590103,194.69528980047215,93.12230519692609,4.814634857137527

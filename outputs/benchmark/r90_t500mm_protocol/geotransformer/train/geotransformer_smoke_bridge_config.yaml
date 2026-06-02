@@ -1,0 +1,74 @@
+dataset:
+  data_root: /mnt/f/Datasets/C3VD_sever_datasets
+  num_points: 8192
+  train_ratio: 0.7
+  random_seed: 42
+  sampling_mode: voxel
+  normalize_mode: none
+  frame_stride: 1
+  max_train_pairs: null
+  max_test_pairs: null
+  perturbation_enabled: true
+  rotation_deg: 90.0
+  translation_m: 500.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+  synthetic_rotation_deg: 45.0
+  synthetic_translation_m: 0.5
+  train_scenes:
+  - cecum_t2_a
+  - cecum_t2_b
+  - cecum_t2_c
+  - cecum_t4_a
+  - cecum_t4_b
+  - desc_t4_a
+  - sigmoid_t1_a
+  - sigmoid_t2_a
+  - trans_t1_b
+  - trans_t2_a
+  - trans_t2_c
+  - trans_t3_a
+  - trans_t3_b
+  val_scenes:
+  - cecum_t1_b
+  - sigmoid_t3_a
+  - trans_t4_b
+  test_scenes:
+  - cecum_t1_a
+  - cecum_t3_a
+  - sigmoid_t3_b
+  - trans_t1_a
+  - trans_t2_b
+  - trans_t4_a
+  max_val_pairs: null
+training:
+  experiment_name: benchmark_full_geotransformer
+  device: cuda:0
+  seed: 42
+  batch_size: 1
+  num_workers: 0
+  max_epochs: 5
+  max_train_steps: null
+  max_val_steps: null
+  save_interval: 1
+  validate_every: 1
+  checkpoint_dir: /home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/geotransformer/train/train_bridge
+  log_dir: /home/linzhe/PCLR_compare/outputs/benchmark/r90_t500mm_protocol/geotransformer/train/train_bridge_logs
+  neighbor_limits:
+  - 38
+  - 36
+  - 36
+  - 38
+  resume_from: /home/linzhe/PCLR_compare/outputs/benchmark/hparam_transfer/geotransformer_measured_run/train_protocol_full_fixed/train_bridge/geotransformer_c3vd_model_best.pth
+  resume_optimizer: false
+optim:
+  lr: 5.0e-05
+  lr_decay: 0.95
+  lr_decay_steps: 1
+  weight_decay: 1.0e-06
+  grad_acc_steps: 1
+model:
+  experiment_name: geotransformer.3dmatch.stage4.gse.k3.max.oacl.stage2.sinkhorn
+  spatial_scale: 100.0
+  num_points_in_patch: 4

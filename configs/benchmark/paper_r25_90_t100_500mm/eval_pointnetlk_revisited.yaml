@@ -5,7 +5,7 @@ benchmark:
   point_unit: mm_like
   official_track: main
 data:
-  manifest_path: outputs/benchmark/flow_check_eval/c3vd_raycasting_manifest.jsonl
+  manifest_path: manifests/c3vd_raycasting_v1.jsonl
   subset_config_path: configs/subset_config.json
   dataset_root: /mnt/f/Datasets/C3VD_sever_datasets
 preprocess:
@@ -15,7 +15,7 @@ preprocess:
   num_points_override: 8192
 model:
   id: pointnetlk_revisited
-  checkpoint_path: outputs/benchmark/r90_t500mm_protocol/pointnetlk_revisited/train/train_bridge/pointnetlk_c3vd_model_best.pth
+  checkpoint_path: checkpoints/pointnetlk_revisited/pointnetlk_c3vd_model_best.pth
   overrides:
     normalize_mode: none
     max_iter: 10
@@ -39,7 +39,7 @@ runtime:
   export_html: false
   output_dir: outputs/benchmark/r25_90_t100_500mm_protocol/pointnetlk_revisited/eval_test
   train_mode: smoke
-  train_metadata_path: outputs/benchmark/r90_t500mm_protocol/pointnetlk_revisited/train/run_metadata.json
+  train_metadata_path: null
   dataset_overrides: {}
   training_overrides: {}
 analysis:

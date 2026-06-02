@@ -57,32 +57,6 @@ The full C3VDReg data release link is withheld during double-blind review and wi
 
 This repository includes a small smoke-test subset under `sample_data/c3vdreg_tiny_8192/`. It contains 6 local-to-local pairs, with 2 train, 2 val, and 2 test pairs. Each source and target point cloud has 8,192 points. This subset is only for verifying the loader and CLI wiring; it is not used for the BMVC benchmark numbers.
 
-Run the tiny ICP evaluation without downloading checkpoints:
-
-```bash
-python scripts/runners/eval_benchmark.py \
-  --config configs/benchmark/tiny_8192/eval_icp.yaml
-```
-
-Run the tiny GeoTransformer checkpoint evaluation from the C3VDReg Python
-environment:
-
-```bash
-python scripts/runners/eval_geotransformer_tiny.py --build-baseline
-```
-
-The script clones the original GeoTransformer repository into
-`baselines/GeoTransformer` if it is missing and keeps that external repository
-untracked. It reassembles the committed checkpoint shards under
-`checkpoints/geotransformer/geotransformer_c3vd_model_best.pth.parts/` into
-the ignored local file
-`checkpoints/geotransformer/geotransformer_c3vd_model_best.pth`, runs
-`configs/benchmark/tiny_8192/eval_geotransformer.yaml`, and writes local result
-tables plus visualizations under
-`outputs/benchmark/tiny_8192/geotransformer_eval/`.
-The external baseline source is the original GeoTransformer code repository:
-`https://github.com/qinzheng93/GeoTransformer`.
-
 The committed manifest uses relative paths, for example:
 
 ```text
@@ -141,7 +115,44 @@ Expected checkpoint layout after restore:
 
 ## Evaluation Interface
 
-Run one paper-protocol evaluation:
+Reviewers can run the committed tiny subset first. This checks the loader,
+checkpoint restore path, metric code, HTML report generation, and qualitative
+visualization without requiring the full dataset release.
+
+Run the checkpoint-free ICP smoke test:
+
+```bash
+python scripts/runners/eval_benchmark.py \
+  --config configs/benchmark/tiny_8192/eval_icp.yaml
+```
+
+Run the GeoTransformer smoke test:
+
+```bash
+python scripts/runners/eval_geotransformer_tiny.py --build-baseline
+```
+
+On the first run, this helper clones the original GeoTransformer repository
+from `https://github.com/qinzheng93/GeoTransformer` into
+`baselines/GeoTransformer`, builds its extension, reassembles the committed
+checkpoint shards into the ignored local file
+`checkpoints/geotransformer/geotransformer_c3vd_model_best.pth`, and evaluates
+`configs/benchmark/tiny_8192/eval_geotransformer.yaml`.
+
+The expected GeoTransformer smoke-test outputs are written under:
+
+```text
+outputs/benchmark/tiny_8192/geotransformer_eval/
+```
+
+Key files include `report.html`, `summary_overview.md`,
+`leaderboard/leaderboard_main.csv`, `curves/rr_multithreshold.png`, and
+qualitative alignment renders under `qualitative/distance_render/`.
+
+After the full dataset and checkpoint bundle are released, paper-protocol
+evaluation uses the same entry point with the BMVC config files. Set
+`data.dataset_root` in the selected YAML to the local C3VDReg data root, restore
+the required checkpoint under `checkpoints/`, then run:
 
 ```bash
 python scripts/runners/eval_benchmark.py \

@@ -64,6 +64,24 @@ python scripts/runners/eval_benchmark.py \
   --config configs/benchmark/tiny_8192/eval_icp.yaml
 ```
 
+Run the tiny GeoTransformer checkpoint evaluation after restoring the released
+GeoTransformer checkpoint. Run this from the C3VDReg Python environment:
+
+```bash
+python scripts/runners/eval_geotransformer_tiny.py \
+  --checkpoint /path/to/geotransformer_c3vd_model_best.pth \
+  --build-baseline
+```
+
+The script clones the original GeoTransformer repository into
+`baselines/GeoTransformer` if it is missing, keeps that external repository
+untracked, copies the checkpoint to
+`checkpoints/geotransformer/geotransformer_c3vd_model_best.pth`, runs
+`configs/benchmark/tiny_8192/eval_geotransformer.yaml`, and writes local result
+tables plus visualizations under `outputs/benchmark/tiny_8192/geotransformer_eval/`.
+The external baseline source is the original GeoTransformer code repository:
+`https://github.com/qinzheng93/GeoTransformer`.
+
 The committed manifest uses relative paths, for example:
 
 ```text

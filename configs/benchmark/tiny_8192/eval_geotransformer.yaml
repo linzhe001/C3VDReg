@@ -1,0 +1,84 @@
+benchmark:
+  name: c3vdreg_tiny_8192
+  split: test
+  subset_name: null
+  point_unit: mm_like
+  official_track: smoke
+
+data:
+  manifest_path: manifests/c3vdreg_tiny_8192.jsonl
+  subset_config_path: null
+  dataset_root: .
+
+preprocess:
+  profile: canonical_v1
+  seed: 42
+  sampling_override: null
+  num_points_override: 8192
+
+model:
+  id: geotransformer
+  checkpoint_path: checkpoints/geotransformer/geotransformer_c3vd_model_best.pth
+  overrides:
+    normalize_mode: none
+    experiment_name: geotransformer.3dmatch.stage4.gse.k3.max.oacl.stage2.sinkhorn
+    neighbor_limits:
+    - 38
+    - 36
+    - 36
+    - 38
+    spatial_scale: 100.0
+    num_points_in_patch: 4
+
+perturbation:
+  enabled: true
+  rotation_deg: 90.0
+  translation_m: 500.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+  min_rotation_deg: 25.0
+  min_translation_m: 100.0
+
+runtime:
+  device: cuda:0
+  batch_size: 1
+  num_workers: 0
+  export_html: true
+  output_dir: outputs/benchmark/tiny_8192/geotransformer_eval
+  train_mode: smoke
+  train_metadata_path: null
+  dataset_overrides: {}
+  training_overrides: {}
+
+analysis:
+  required_tables:
+  - leaderboard_main
+  - leaderboard_multithreshold
+  - bucket_overlap
+  - bucket_rotation
+  - bucket_scene
+  - efficiency_summary
+  - geometry_summary
+  required_curves:
+  - rr_multithreshold
+  - success_latency_pareto
+  bucket_keys:
+  - overlap_bin
+  - rotation_bin
+  - translation_bin
+  - scene_id
+  - preprocess_profile_id
+  - refinement_track
+  geometry:
+    sample_count: 2
+    distance_mode: visible_overlap_preferred
+    export_histogram: true
+    export_cdf: true
+  qualitative:
+    topk_failures: 2
+    export_failure_gallery: false
+  export:
+    html: true
+    png: true
+    markdown_tables: true

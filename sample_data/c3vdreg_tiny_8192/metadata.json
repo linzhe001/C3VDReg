@@ -1,0 +1,75 @@
+{
+  "files": [
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/C3VD_ply_source/cecum_t1_a/0000_depth_pcd.ply",
+      "sha256": "563e175404008339c2a43b6d28beb2b73a7f7f0f692c1c0a28483aef833843e3"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/visible_point_cloud_ply_depth/cecum_t1_a/frame_0000_visible.ply",
+      "sha256": "fb4df6f6b74c6eac3084ebb2b9e7ca3d4e2cda144d22a5a2382192c0e46ab2a5"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/C3VD_ply_source/cecum_t1_a/0001_depth_pcd.ply",
+      "sha256": "e28f103c00599fd5cc339336dab47a09c762085d85f6250542ab4de815bf1918"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/visible_point_cloud_ply_depth/cecum_t1_a/frame_0001_visible.ply",
+      "sha256": "423a282068bda8cf1f4e6ea9335f6c05f515f71d444dee2a6d45046cf6f4dadd"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/C3VD_ply_source/cecum_t1_b/0000_depth_pcd.ply",
+      "sha256": "05c298453bc33818baf8aa10e94fd9576d757a9bc5675d12047edf424a320c78"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/visible_point_cloud_ply_depth/cecum_t1_b/frame_0000_visible.ply",
+      "sha256": "9fedb99e638beb0683a345564c8c8b8de4d737e434de2c433c0dbf99e2d7128e"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/C3VD_ply_source/cecum_t1_b/0001_depth_pcd.ply",
+      "sha256": "d00482f1ec714bf96367782b498b11f3f0b414bd19e1215d968671e6d461d575"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/visible_point_cloud_ply_depth/cecum_t1_b/frame_0001_visible.ply",
+      "sha256": "85dde780db3ca7e1f6913fd627408b048edf317db27a35fc2851b9f9adcb0863"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/C3VD_ply_source/cecum_t2_a/0000_depth_pcd.ply",
+      "sha256": "62b3e8f845f933b5b2555828fb6c90e04c0c239a2e7ab9d580f94ae4dde06a02"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/visible_point_cloud_ply_depth/cecum_t2_a/frame_0000_visible.ply",
+      "sha256": "9411ac7e07f6f765eec09404d2591d06261a70d8b913bfcdbb724dc697c90917"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/C3VD_ply_source/cecum_t2_a/0001_depth_pcd.ply",
+      "sha256": "822e1cf7929481f1ff24e44cffa375d84552dbad70a6e0abb02e5eb70babc3d6"
+    },
+    {
+      "bytes": 98422,
+      "path": "sample_data/c3vdreg_tiny_8192/visible_point_cloud_ply_depth/cecum_t2_a/frame_0001_visible.ply",
+      "sha256": "ed8eea5e56f092df505a5717a53b0efa61ecb5e313400d087690b15d1b2ddd5a"
+    }
+  ],
+  "manifest": "manifests/c3vdreg_tiny_8192.jsonl",
+  "pair_count": 6,
+  "point_budget_per_cloud": 8192,
+  "purpose": "small committed smoke-test subset for C3VDReg loader and CLI checks; not a benchmark substitute",
+  "sampling": "deterministic evenly spaced index sampling from original source/target PLY files",
+  "split_pair_counts": {
+    "test": 2,
+    "train": 2,
+    "val": 2
+  },
+  "subset_id": "c3vdreg_tiny_8192"
+}

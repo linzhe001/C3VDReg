@@ -1,6 +1,6 @@
 # C3VDReg
 
-Dataset and checkpoint download links are withheld during double-blind review and will be released after the review period.
+Full dataset and checkpoint download links are withheld during double-blind review and will be released after the review period. A tiny 8,192-point smoke-test subset is committed for interface checks only.
 
 This repository is the code/configuration companion for the BMVC2026 paper, titled `C3VDReg: A Benchmark for Local-to-Local Colonoscopic Registration toward Anatomical Localization`.
 
@@ -35,6 +35,7 @@ Remote repository contents:
 
 - `configs/`: benchmark dataset, preprocess, model, paper evaluation, 0-200 epoch training, and HPT config files.
 - `manifests/`: portable C3VDReg manifest with paths relative to `data.dataset_root`.
+- `sample_data/`: tiny 8,192-point C3VDReg smoke-test subset, not a benchmark substitute.
 - `requirements.txt`: Python dependency list.
 - `scripts/`: train/eval entry points, manifest builder, and minimal HPT helper CLIs.
 - `src/`: benchmark runners, adapters, preprocessing, metrics, reporting, HPT utilities, and shared utilities.
@@ -52,7 +53,16 @@ Install the PyTorch build that matches the local CUDA driver before running GPU 
 
 ## Data
 
-The C3VDReg data release link is withheld during double-blind review and will be released after the review period.
+The full C3VDReg data release link is withheld during double-blind review and will be released after the review period.
+
+This repository includes a small smoke-test subset under `sample_data/c3vdreg_tiny_8192/`. It contains 6 local-to-local pairs, with 2 train, 2 val, and 2 test pairs. Each source and target point cloud has 8,192 points. This subset is only for verifying the loader and CLI wiring; it is not used for the BMVC benchmark numbers.
+
+Run the tiny ICP evaluation without downloading checkpoints:
+
+```bash
+python scripts/runners/eval_benchmark.py \
+  --config configs/benchmark/tiny_8192/eval_icp.yaml
+```
 
 The committed manifest uses relative paths, for example:
 

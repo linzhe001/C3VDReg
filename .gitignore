@@ -15,11 +15,11 @@ __pycache__/
 /SELECTED_CHECKPOINTS.csv
 
 # Local-only raw datasets and scratch outputs
-data/
-datasets/
-raw_data/
-tmp/
-temp/
+/data/
+/datasets/
+/raw_data/
+/tmp/
+/temp/
 
 # External baseline source trees are cloned by the user and kept out of this repo.
 /baselines/*

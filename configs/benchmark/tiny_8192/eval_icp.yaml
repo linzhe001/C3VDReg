@@ -1,0 +1,78 @@
+benchmark:
+  name: c3vdreg_tiny_8192
+  split: test
+  subset_name: null
+  point_unit: mm_like
+  official_track: smoke
+
+data:
+  manifest_path: manifests/c3vdreg_tiny_8192.jsonl
+  subset_config_path: null
+  dataset_root: .
+
+preprocess:
+  profile: canonical_v1
+  seed: 42
+  sampling_override: null
+  num_points_override: 8192
+
+model:
+  id: icp
+  checkpoint_path: null
+  overrides:
+    normalize_mode: none
+    max_iter: 50
+    ftol: 1.0e-07
+
+perturbation:
+  enabled: false
+  rotation_deg: 0.0
+  translation_m: 0.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
+  min_rotation_deg: 0.0
+  min_translation_m: 0.0
+
+runtime:
+  device: cpu
+  batch_size: 1
+  num_workers: 0
+  export_html: false
+  output_dir: outputs/benchmark/tiny_8192/icp_eval
+  train_mode: smoke
+  train_metadata_path: null
+  dataset_overrides: {}
+  training_overrides: {}
+
+analysis:
+  required_tables:
+  - leaderboard_main
+  - leaderboard_multithreshold
+  - bucket_overlap
+  - bucket_rotation
+  - bucket_scene
+  - efficiency_summary
+  - geometry_summary
+  required_curves:
+  - rr_multithreshold
+  - success_latency_pareto
+  bucket_keys:
+  - overlap_bin
+  - rotation_bin
+  - translation_bin
+  - scene_id
+  - preprocess_profile_id
+  - refinement_track
+  geometry:
+    sample_count: 2
+    distance_mode: visible_overlap_preferred
+    export_histogram: false
+    export_cdf: false
+  qualitative:
+    topk_failures: 2
+    export_failure_gallery: false
+  export:
+    html: false
+    png: false
+    markdown_tables: true

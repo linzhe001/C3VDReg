@@ -27,6 +27,9 @@ scripts/pcl_gen/tmp*
 !/outputs/**/*.yaml
 !/outputs/**/*.yml
 
+# Manuscript drafts and generated paper artifacts are local-only.
+/BMVC2026_Linzhe/
+
 # Checkpoints are distributed out-of-band and restored under checkpoints/.
 /checkpoints/*
 !/checkpoints/README.md

@@ -26,7 +26,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--runtime-config",
-        default="configs/benchmark/runtime/full_train.yaml",
+        default="configs/benchmark/train_r90_t500mm_0_200epoch/base_train.yaml",
         help="Base runtime config used to seed per-model train configs.",
     )
     parser.add_argument(
@@ -82,7 +82,9 @@ def _build_launch_payload(
     execution_results = execution_results or []
     ready_count = sum(1 for entry in plan if entry["ready_for_requested_mode"])
     blocked_count = len(plan) - ready_count
-    success_count = sum(1 for entry in execution_results if entry["status"] == "success")
+    success_count = sum(
+        1 for entry in execution_results if entry["status"] == "success"
+    )
     failed_count = sum(1 for entry in execution_results if entry["status"] == "failed")
     return {
         "runtime_config": report["runtime_config"],
@@ -218,7 +220,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         model_ids=args.models,
         write_configs=True,
     )
-    audit_json_path, audit_markdown_path = write_train_rollout_report(report, output_root)
+    audit_json_path, audit_markdown_path = write_train_rollout_report(
+        report, output_root
+    )
     plan = build_train_launch_plan(report, ready_only=args.ready_only)
 
     execution_results: list[dict[str, Any]] = []

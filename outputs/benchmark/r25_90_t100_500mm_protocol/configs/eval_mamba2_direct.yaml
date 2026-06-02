@@ -15,7 +15,7 @@ preprocess:
   num_points_override: 8192
 model:
   id: mamba3d_mamba2_direct
-  checkpoint_path: /home/linzhe/PCLR_compare/checkpoints/mamba3d_mamba2_direct/mamba3d_pointlk_model_best.pth
+  checkpoint_path: checkpoints/PointNetLK_mamba/pointlk_mamba_model_best.pth
   overrides:
     normalize_mode: unit_cube
     model_type: mamba3d_mamba2_direct
@@ -66,7 +66,7 @@ runtime:
   export_html: false
   output_dir: outputs/benchmark/r25_90_t100_500mm_protocol/mamba2_direct/eval_test
   train_mode: smoke
-  train_metadata_path: /home/linzhe/PCLR_compare/outputs/benchmark/mamba2_followup_point_order_pair_initializer/direct_sort_xyz_e5/train/run_metadata.json
+  train_metadata_path: null
   dataset_overrides: {}
   training_overrides: {}
 analysis:

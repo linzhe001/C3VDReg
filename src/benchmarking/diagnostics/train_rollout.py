@@ -209,7 +209,7 @@ def build_train_rollout_markdown(report: dict[str, Any]) -> str:
         f"- Runtime config: `{report['runtime_config']}`",
         f"- Stable train runner mode: `{report['stable_train_runner_mode']}`",
         f"- Requested train mode: `{report['requested_train_mode']}`",
-        f"- Full-train runtime config exists: `{report['full_train_runtime_exists']}`",
+        f"- Full-train base config exists: `{report['full_train_runtime_exists']}`",
         f"- CUDA available: `{report['environment']['cuda_available']}`",
         "",
         "| model | train supported | normalize | smoke ready | full ready | blockers |",
@@ -241,8 +241,13 @@ def generate_train_rollout_audit(
     output_root = output_root.resolve()
     config_dir = output_root / "configs"
     bridge_dir = output_root / "bridge_configs"
-    runtime_dir = repo_root / "configs" / "benchmark" / "runtime"
-    full_train_runtime_path = runtime_dir / "full_train.yaml"
+    full_train_runtime_path = (
+        repo_root
+        / "configs"
+        / "benchmark"
+        / "train_r90_t500mm_0_200epoch"
+        / "base_train.yaml"
+    )
     requested_train_mode = _requested_train_mode(runtime_config_path)
 
     report: dict[str, Any] = {
@@ -360,7 +365,9 @@ def generate_train_rollout_audit(
                 and not report["full_train_runtime_exists"]
             ):
                 blockers.append(
-                    "full-train: configs/benchmark/runtime/full_train.yaml is missing"
+                    "full-train: "
+                    "configs/benchmark/train_r90_t500mm_0_200epoch/"
+                    "base_train.yaml is missing"
                 )
 
         report["models"].append(

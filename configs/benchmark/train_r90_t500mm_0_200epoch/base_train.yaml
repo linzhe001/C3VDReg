@@ -1,7 +1,7 @@
 benchmark:
   name: c3vd_raycasting_v1
-  split: test
-  subset_name: mvp_stride10
+  split: train
+  subset_name: null
   point_unit: mm_like
   official_track: main
 
@@ -14,28 +14,30 @@ preprocess:
   profile: canonical_v1
   seed: 42
   sampling_override: null
-  num_points_override: null
-
-perturbation:
-  enabled: true
-  rotation_deg: 45.0
-  translation_m: 0.5
-  noise_sigma: 0.0
-  noise_clip: 0.0
-  apply_noise_to: source
+  num_points_override: 8192
 
 model:
   id: dcp
   checkpoint_path: null
-  overrides:
-    emb_nn: dgcnn
-    pointer: transformer
-    head: svd
+  overrides: {}
+
+perturbation:
+  enabled: true
+  rotation_deg: 90.0
+  translation_m: 500.0
+  min_rotation_deg: 0.0
+  min_translation_m: 0.0
+  noise_sigma: 0.0
+  noise_clip: 0.0
+  apply_noise_to: source
 
 runtime:
   device: cuda:0
   batch_size: 1
-  num_workers: 0
-  export_html: true
-  output_dir: outputs/benchmark/smoke_eval
+  num_workers: 4
+  export_html: false
+  output_dir: outputs/benchmark/r90_t500mm_0_200epoch/base_train
+  train_mode: full
   train_metadata_path: null
+  dataset_overrides: {}
+  training_overrides: {}

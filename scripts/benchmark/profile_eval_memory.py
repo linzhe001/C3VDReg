@@ -22,7 +22,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--runtime-config",
-        default="configs/benchmark/runtime/smoke_eval.yaml",
+        default="configs/benchmark/paper_r25_90_t100_500mm/base_eval.yaml",
         help="Base runtime config used to seed per-model eval configs.",
     )
     parser.add_argument(

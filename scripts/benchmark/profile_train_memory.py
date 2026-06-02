@@ -23,7 +23,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--runtime-config",
-        default="configs/benchmark/runtime/smoke_train.yaml",
+        default="configs/benchmark/train_r90_t500mm_0_200epoch/base_train.yaml",
         help="Base runtime config used to seed per-model train configs.",
     )
     parser.add_argument(

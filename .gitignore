@@ -11,6 +11,7 @@ __pycache__/
 # Keep project documentation centralized in the root README.md.
 *.md
 !/README.md
+!/src/benchmarking/hparam_transfer/SKILL.md
 
 # Local-only raw datasets and scratch outputs
 data/

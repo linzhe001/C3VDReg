@@ -10,7 +10,6 @@ import torch
 def voxel_down_sample(points, num_points):
     """
     Unified VoxelGrid-based downsampling
-    使用基于VoxelGrid的均匀降采样，与PointNetLK_c3vd一致
 
     This ensures spatial uniformity and preserves geometric structure.
     Same implementation as PointNetLK_c3vd for consistency.
@@ -78,7 +77,6 @@ def voxel_down_sample(points, num_points):
 def clean_point_cloud(points, min_points=100):
     """
     Clean point cloud by removing NaN/Inf values
-    与PointNetLK_c3vd一致的异常值处理
 
     Args:
         points: numpy array (N, 3) or torch.Tensor (N, 3)
@@ -113,7 +111,6 @@ def preprocess_point_cloud(
 ):
     """
     Complete preprocessing pipeline for point clouds
-    统一的点云预处理流程
 
     Args:
         points: input point cloud, numpy array (N, 3) or torch.Tensor (N, 3)

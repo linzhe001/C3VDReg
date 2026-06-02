@@ -12,7 +12,7 @@ model:
   dim_k: 1024
   num_mamba_blocks: 1
   d_state: 8
-  expand: 1.5  # 匹配原始权重（从 192 = 128 * 1.5 推导）
+  expand: 1.5  # Matches original weights: 192 = 128 * 1.5.
   max_iter: 20
   delta: 1.0e-2
 

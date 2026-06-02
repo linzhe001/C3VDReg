@@ -36,29 +36,34 @@ def _build_overview_payload(aggregate_summary: dict[str, Any]) -> dict[str, Any]
         "recommended_reading_order": [
             {
                 "path": "summary_overview.md",
-                "purpose": "先看这一页，快速确认本次 run 的关键结论。",
+                "purpose": "Start here for the key conclusions of this run.",
             },
             {
                 "path": "leaderboard/leaderboard_main.csv",
                 "purpose": (
-                    "主结果表，优先看 RR@5deg/5mm、边际命中率、RRE、"
-                    "RTE、trimmed Chamfer、训练时间和训练峰值显存。"
+                    "Main result table. Prioritize RR@5deg/5mm, marginal hit "
+                    "rates, RRE, RTE, trimmed Chamfer, training time, and peak "
+                    "training memory."
                 ),
             },
             {
                 "path": "leaderboard/efficiency_summary.csv",
                 "purpose": (
-                    "速度与资源表，优先看训练时间、训练峰值显存、"
-                    "preprocess/inference/latency。"
+                    "Speed and resource table. Prioritize training time, peak "
+                    "training memory, preprocess time, inference time, and "
+                    "latency."
                 ),
             },
             {
                 "path": "geometry/geometry_summary.csv",
-                "purpose": "几何误差摘要，优先看 visible_nn_mean 和 chamfer。",
+                "purpose": (
+                    "Geometry error summary. Prioritize visible_nn_mean and "
+                    "Chamfer."
+                ),
             },
             {
                 "path": "report.html",
-                "purpose": "图表和链接总览。",
+                "purpose": "HTML overview of plots and linked artifacts.",
             },
         ],
         "headline_metrics": {
@@ -113,9 +118,9 @@ def _write_overview_files(
     )
 
     lines = [
-        "# 快速结果概览",
+        "# Quick Result Overview",
         "",
-        "## 先看什么",
+        "## Recommended Reading Order",
     ]
     for index, item in enumerate(overview["recommended_reading_order"], start=1):
         lines.append(
@@ -125,7 +130,7 @@ def _write_overview_files(
     lines.extend(
         [
             "",
-            "## 关键指标",
+            "## Headline Metrics",
         ]
     )
     for key, value in overview["headline_metrics"].items():
@@ -134,7 +139,7 @@ def _write_overview_files(
     lines.extend(
         [
             "",
-            "## 速度与资源",
+            "## Speed And Resources",
         ]
     )
     for key, value in overview["efficiency_metrics"].items():
@@ -143,7 +148,7 @@ def _write_overview_files(
     lines.extend(
         [
             "",
-            "## 几何摘要",
+            "## Geometry Summary",
         ]
     )
     for key, value in overview["geometry_metrics"].items():
